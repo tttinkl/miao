@@ -118,22 +118,25 @@
       <input type="text">
       <input type="text">
     </fieldset>
-    <button id="footer">提交</button>
+    <button>提交</button>
     <button type="reset">重置</button>
   </form>
-<!--   <hr>
-  <table>
+  <hr>
+  <table border="1px solid" cellspacing=0>
     <caption>货品列表</caption>
-    <tr>
-      <th>编号</th>
-      <th>品名</th>
-      <th>进价</th>
-      <th>出价</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>品名</th>
+        <th>进价</th>
+        <th>出价</th>
+      </tr>
+  </thead>
+  <tbody>
     <tr>
       <th>001</th>
       <td>苹果</td>
-      <td rowspan="2">5</td>
+      <td rowspan="2" bgcolor="red">5</td>
       <td>8</td>
     </tr>
     <tr>
@@ -153,8 +156,18 @@
       <td>5</td>
       <td>8</td>
     </tr>
+  </tbody>
   </table>
-  <hr> -->
-
+  <hr>
+  <img src="images/cateagle.jpg" width="300" alt="图片加载失败" usemap="#imgmap">
+  <map name="imgmap">
+    <area shape="rec" coords="55,108,205,200" href="www.mi.com" alt="小米商城">
+    <area shape="circle" coords="133,262,90" href="" alt="">
+    <area shape="poly" coords="57,82,8,265,163,397,225,256,187,83" href="" alt="">
+  </map>
+  <hr>
+  <hr>
+  <div><a href="www.mi.com" for="#mi">点击我会在下面的frame里打开小米商城，但为什么打不开呢？</a></div>
+  <iframe id="footer" name="mi" src="https://nodejs.org" frameborder="0" width="300" height="200"></iframe>
 </body>
 </html>
