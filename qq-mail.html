@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>qq-mail-inline-block</title>
+  <style>
+    html {
+      border: 0px;
+    }
+    * {
+      box-sizing: border-box;
+      xborder: 1px solid;
+    }
+    .container {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      top: 8px;
+      bottom:8px;
+    }
+    header {
+      margin: 8px;
+      height: 100px;
+    }
+    .main {
+      position: relative;
+      width:100%;
+      height: calc(100% - 116px);
+      background: #96b3e6;
+    border-radius: 5px;
+
+    }
+    nav {
+      width: 200px;
+      display: inline-block;
+      height: 100%;
+      background: #96b3e6;
+      border-radius: 5px;
+      vertical-align: top;
+    }
+    .wrc {
+      height: 150px;
+      background: white;
+      margin: 8px;
+    }
+    .otherMenu {
+      background: white;
+      margin: 8px;
+      height: calc(100% - 174px)
+    }
+    .mainframe {
+      background: white;
+      display: inline-block;
+      margin-top:8px;
+      margin-left: 0px;
+      width: calc(100% - 200px);
+      height: calc(100% - 8px);
+      box-shadow: 1px 0 0 white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      
+    </header>
+    <div class="main">
+      <nav>
+        <div class="wrc">
+          <div><a href="">a</a></div>
+          <div><a href="">a</a></div>
+          <div><a href="">a</a></div>
+        </div>
+        <div class="otherMenu"></div>
+      </nav><div class="mainframe"> 
+      </div>
+    </div>
+  </div>
+</body>
+</html>

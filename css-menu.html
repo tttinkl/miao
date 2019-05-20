@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+
+    .main > li:nth-child(1) {
+      position: absolute;
+      left: 0px;
+    }
+    .main > li:nth-child(2) {
+      position: absolute;
+      left: 40px;
+    }
+    .main > li:nth-child(3) {
+      position: absolute;
+      left: 80px;
+    }
+    ul {
+      list-style: none;
+      padding: 0px;
+    }
+    .main li {
+      position: relative;
+    }
+    li ul {
+      position: absolute;
+      top: 100%;
+      left: 0px;
+    }
+    li:hover > ul {
+      display: block;
+    }
+    ul ul  {
+      display: none;
+      white-space:nowrap;
+    }
+    .trd {
+      position: absolute;
+      top: 0px;
+      left: 100%;
+      
+    }
+
+  </style>
+</head>
+<body>
+  <ul class="main">
+    
+
+    <li>跳转
+      <ul class="snd">
+        
+        <li>切换文件
+          <ul class="trd">
+            <li>上一文件</li>
+            <li>下一文件</li>
+            <li>切换头文件</li>
+          </ul>
+        </li>
+        
+        <li>滚动
+          <ul class="trd">
+            <li>滚动到选择</li>
+            <li>到上一行</li>
+            <li>到下一行</li>
+          </ul>
+        </li>
+        
+        <li>书签
+          <ul class="trd">
+            <li>下一书签</li>
+            <li>前一书签</li>
+            <li>清除书签</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    
+    
+    <li>视图
+      <ul class="snd">
+        <li>侧边栏
+          <ul class="trd">
+            <li>显示/隐藏侧边栏</li>
+            <li>显示/隐藏打开的文件</li>
+          </ul>
+        </li>
+        
+        <li>分组
+          <ul class="trd">
+            <li>文件移到新组</li>
+            <li>新建组</li>
+            <li>关闭组</li>
+          </ul>
+        </li>
+        
+        <li>拼写字典
+          <ul class="trd">
+            <li>en_GB</li>
+            <li>en_US</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    
+
+    <li>编辑
+      <ul class="snd">
+       
+        <li>行
+          <ul class="trd">
+            <li>恢复缩进</li>
+            <li>删除行</li>
+            <li>合并行</li>
+          </ul>
+        </li>
+       
+        <li>注释
+          <ul class="trd">
+            <li>开启/关闭单行注释</li>
+            <li>开启/关闭多行注释</li>
+          </ul>
+        </li>
+       
+        <li>文本
+          <ul class="trd">
+            <li>向前删除单词</li>
+            <li>向后删除单词</li>
+            <li>删除行</li>
+          </ul>
+        </li>
+
+      </ul>
+    </li>
+  </ul>
+</body>
+</html>

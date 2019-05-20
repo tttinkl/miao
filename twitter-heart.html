@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      float: left;
+      background-image: url(images/blink.png);
+      height:80px;
+      width:50px;
+      background-position:-25px;
+      transition: background-position  steps(28);
+    }
+    div:hover {
+      animation: play .3s steps(28) ;
+    }
+    @keyframes play {
+      from {background-position:-25px;}
+      to {background-position:-2825px;}
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

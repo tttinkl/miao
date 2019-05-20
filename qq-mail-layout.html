@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mail-layout-position</title>
+  <style>
+    body {
+      margin:8;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    .header {
+      position: relative;
+      width: 100%;
+      height: 70px;
+      xborder:1px solid;
+      margin: 0;
+    }
+    .logo {
+      position: absolute;
+    }
+    .switch {
+      position: absolute;
+      left: 180px;
+      font-size: 12px;
+    }
+    .topbg {
+      position: absolute;
+      right: 30px;
+      bottom: 0;
+      font-size: 12px;
+      height: 100%;
+    }
+    .search {
+      position: absolute;
+      bottom: 0;
+    }
+    .main {
+      right: -2px;
+      position: absolute;
+      top: 85px;
+      bottom: 0;
+      left: 0px;
+      xborder: 1px solid;
+      background: #96b3e6;
+      border-radius: 5px;
+    }
+    nav {
+      position: absolute;
+      top: 5px;
+      width: 189px;
+      left: 5px;
+      xborder: 1px solid;
+      height: calc(100% - 16px);
+      background: white;
+    }
+    .mainframe {
+      position: absolute;
+      height: calc(100% - 10px);
+      width: calc(100% - 210px);
+      left: 205px;
+      xborder: 1px solid;
+      background: white;
+      top: 5px;
+      overflow: scroll;
+    }
+    .menu {
+      padding: 3px;
+    }
+    .others {
+      display: block;
+      padding: 2px 0;
+    }
+    .others:hover {
+
+    }
+    .wrc {
+      position: absolute;
+      height: 80px;
+      margin: 5px;
+    }
+    .otherMenu {
+      position: absolute;
+      overflow: scroll;
+      top: 85px;
+      width: 100%;
+      bottom: 5px;
+      margin: 5px;
+      font-size: 12px;
+    }
+
+    hr {
+      width: 90%;
+      margin-left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <a href="#"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558261098222&di=c059211f6e1eb0e42cb54803b65afcb7&imgtype=0&src=http%3A%2F%2Fwx2.sinaimg.cn%2Fcrop.0.0.640.359.1000%2F6a0ba317gy1fc1qs3pronj20hs0crdfy.jpg" alt="break" style="width:160px; margin-top: -20px;" class="logo"></a>
+      </div>
+
+      <div class="switch">
+        <p><span><b>name</b></span><span><b>mail@qq.com</b></span></p>
+        <p><a href="#">邮箱首页</a>| <a href="#">设置</a> - <a href="#">换肤</a></p>
+      </div>
+
+      <div class="topbg">
+        <div class="right">
+          <a href="#">*</a>
+          <a href="#">反馈建议</a>
+          <a href="#">帮助中心</a>
+          <a href="#">退出</a>
+        </div>
+        <div class="search"><input type="text"></div>
+      </div>
+    </div>
+
+    <div class="main">
+      <nav class="menu">
+        <div class="wrc">
+          <div><a href="#">写信</a></div>
+          <div><a href="">收信</a></div>
+          <div><a href="">通讯录</a></div>
+        </div>
+        <div class="otherMenu">
+          <span class="others"><a href="#">收件箱</a></span>
+          <span class="others"><a href="#">星标邮件</a></span>
+          <span class="others"><a href="#">群邮件</a></span>
+          <span class="others"><a href="#">草稿箱</a></span>
+          <span class="others"><a href="#">已发送</a></span>
+          <span class="others"><a href="#">已删除</a></span>
+          <span class="others"><a href="#">垃圾箱</a></span>
+          <span class="others"><a href="#">QQ邮件订阅</a></span>
+          <hr>
+          <span class="others"><a href="#">其他邮箱</a></span>
+          <hr>
+          <span class="others"><a href="#">漂流瓶</a></span>
+          <span class="others"><a href="#">日历</a> | <a href="#">记事本</a></span>
+          <span class="others"><a href="#">在线文档</a></span>
+          <span class="others"><a href="#">附件收藏</a></span>
+          <span class="others"><a href="#">文件中转站</a></span>
+          <span class="others"><a href="#">简历</a></span>
+          <span class="others"><a href="#">贺卡</a> | <a href="#">明信片</a></span>
+          <span class="others"><a href="#">阅读空间</a></span>
+        </div>
+
+        
+      </nav>
+      
+      <div class="mainframe">
+          
+      </div>
+
+    </div>
+
+
+  </div>
+</body>
+</html>
