@@ -305,19 +305,64 @@ console.log((x * Math.pow((1 + 0.001),n).toFixed(4));
 var r = Number(prompt());
 var m = Number(prompt());
 var y = Number(prompt()); 
-console.log(m * Math.pow((1 + r/100),y));
+console.log(Math.floor(m * Math.pow((1 + r/100),y)));
 </script>
 
 <script id="ch0105/16">
-  
+var n = Number(prompt());
+var k = Number(prompt()); 
+var can = 0;
+var sum = 0;
+var price = 200;
+for(let i = 1;i < 21;i++) {
+  sum += n;
+  if( i > 1) {
+  price = price * (1 + k/100);
+  }
+  if(sum > price) {
+    can = 1;
+    console.log(i);
+    break;
+  }
+}
+if(can == 0) {
+  console.log("Impossible");
+}
 </script>
 
 <script id="ch0105/17">
-  
+var n = Number(prompt());
+var num;
+var num1 = 1;
+var num2 = 1;
+if(n == 1 || n == 2) {
+  console.log(1);
+}
+for(let i = 0; i < n - 2;i++) {
+  var num = num1 + num2;
+  num1 = num2;
+  num2 = num;
+}  
+console.log(num);
 </script>
 
 <script id="ch0105/18">
-  
+var n = Number(prompt()) - 1;
+var ts = Number(prompt());
+var t = Number(prompt());
+var tp = t / ts;
+while(n--) {
+  var s = Number(prompt());
+  var i = Number(prompt());
+  var p = i / s;
+  if (p - tp > 0.05) {
+    console.log("better");
+  } else if(p - tp > (-0.05)) {
+    console.log("same")  
+  } else {
+    console.log("worse");
+  }
+}  
 </script>
 <script id="ch0105/19">
   
