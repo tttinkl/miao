@@ -152,7 +152,7 @@ while(n--) {
   sum = sum + i;
 }
 var aver = sum / n;
-console.log(aver);
+console.log(aver.toFixed(2));
 </script>
 
 <script id="ch0105/02">
@@ -162,17 +162,19 @@ while(n--) {
   sum = sum + i;
 } 
 var aver = sum / n;
-console.log(aver);
+console.log("$" + aver.toFixed(2));
 </script>
 
 <script id="ch0105/03">
 var n = Number(prompt());
+var m = n;
 var sum = 0;
 while(n--) {
   var i = Number(prompt());
   sum = sum + i;
+  console.log(sum);
 }
-var aver = sum / n;
+var aver = sum / m;
 console.log(aver.toFixed(4)); 
 </script>
 
@@ -184,7 +186,7 @@ while(n--) {
   sum = sum + i;
 }
 var aver = sum / n;
-console.log(num + " " + aver.toFixed(5));  
+console.log(sum + " " + aver.toFixed(5));  
 </script>
 
 <script id="ch0105/05">
@@ -197,63 +199,113 @@ while(n--) {
   }
 }
 console.log(max);
+
 </script>
 
 <script id="ch0105/06">
 var n = Number(prompt());
-var s = 0;
-var ax = 0;
+var min = 0;
+var max = 0;
 for(let i = 0;i < n;i++) {
   var a1 = Number(prompt());
-  console.log("a1: " + a1);
-  if(Math.abs(a1 - ax) > s) {
-    console.log("a1 - ax : " + Math.abs(a1 - ax));
-    s = Math.abs(a1 - ax);
-    console.log("s: ",s);
-  }
-  ax = a1;
+  if(min > a1) min = a1;
+  if(max < a1) max = a1;
 }
-if(n == 1) {
-  console.log("zhixing");
-  s = 0;
-}
-console.log(s);
+console.log(max - min);
 </script>
 
 <script id="ch0105/07">
-  
+var n = Number(prompt());
+var sumg = 0,sums = 0,sumc = 0;
+while(n--) {
+  var g = Number(prompt());
+  var s = Number(prompt());
+  var c = Number(prompt());
+  sumg = sumg + g;
+  sums = sums + s;
+  sumc = sumc + c;
+}
+console.log(sumg + " " + sums + " " + sumc + " " + (sumg + sums + sumc));
+ 
 </script>
 
 <script id="ch0105/08">
-  
+var n = Number(prompt());
+var m = n - 1;
+var degsum = (n - 2) * 180;
+var nsum = 0;
+while(m--) {
+var i  = Number(prompt());
+nsum += i;
+}
+console.log(degsum - nsum);
 </script>
 
 <script id="ch0105/09">
-  
+var sum = 0,m = Number(prompt()),n = Number(prompt());
+for (let i = m;i <= n;i++) {
+  if(i % 2 == 1) {
+    sum += i;
+  }
+}
+console.log(sum);
 </script>
 
 <script id="ch0105/10">
-  
+var sum = 0,m = Number(prompt()),n = Number(prompt());
+for (let i = m;i <= n;i++) {
+  if(i % 17 == 0) {
+    sum += i;
+  }
+}
+console.log(sum);  
 </script>
 
 <script id="ch0105/11">
-  
+var n = Number(prompt());
+var count1 = 0,count5 = 0,count10 = 0;
+while(n--) {
+  var i =Number(prompt());
+  switch(i) {
+    case 1: count1++;break;
+    case 5: count5++;break;
+    case 10: count10++;break;
+  }
+}  
+console.log(count1 + "\n" + count5 + "\n" + count10);
 </script>
 
 <script id="ch0105/12">
-  
+var n = Number(prompt());
+var m = Number(prompt());
+var count = 0;
+while(n--) {
+  var i = Number(prompt());
+  if(i == m) {
+    count++;
+  }
+}  
+console.log(count);
 </script>
 
 <script id="ch0105/13">
-  
+var a = Number(prompt());
+var n = Number(prompt());
+console.log(Math.pow(a,n)); 
 </script>
 
 <script id="ch0105/14">
-  
+var x = Number(prompt());
+var n = Number(prompt());
+
+console.log((x * Math.pow((1 + 0.001),n).toFixed(4));
 </script>
 
 <script id="ch0105/15">
-  
+var r = Number(prompt());
+var m = Number(prompt());
+var y = Number(prompt()); 
+console.log(m * Math.pow((1 + r/100),y));
 </script>
 
 <script id="ch0105/16">
