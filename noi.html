@@ -146,12 +146,13 @@ console.log(n);
 
 <script id="ch0105/01">
 var n = Number(prompt());
+var m = n;
 var sum = 0;
 while(n--) {
   var i = Number(prompt());
   sum = sum + i;
 }
-var aver = sum / n;
+var aver = sum / m;
 console.log(aver.toFixed(2));
 </script>
 
@@ -161,7 +162,7 @@ while(n--) {
   var i = Number(prompt());
   sum = sum + i;
 } 
-var aver = sum / n;
+var aver = sum / 12;
 console.log("$" + aver.toFixed(2));
 </script>
 
@@ -172,7 +173,6 @@ var sum = 0;
 while(n--) {
   var i = Number(prompt());
   sum = sum + i;
-  console.log(sum);
 }
 var aver = sum / m;
 console.log(aver.toFixed(4)); 
@@ -180,12 +180,13 @@ console.log(aver.toFixed(4));
 
 <script id="ch0105/04">
 var n = Number(prompt());
+var m = n;
 var sum = 0;
 while(n--) {
   var i = Number(prompt());
   sum = sum + i;
 }
-var aver = sum / n;
+var aver = sum / m;
 console.log(sum + " " + aver.toFixed(5));  
 </script>
 
@@ -297,8 +298,7 @@ console.log(Math.pow(a,n));
 <script id="ch0105/14">
 var x = Number(prompt());
 var n = Number(prompt());
-
-console.log((x * Math.pow((1 + 0.001),n).toFixed(4));
+console.log((x * Math.pow((1 + 0.001),n)).toFixed(4));
 </script>
 
 <script id="ch0105/15">
@@ -385,8 +385,7 @@ while(i--) {
   h = h * 0.5;
   d += h;
   if(i == 0) {
-    console.log(d - h);
-    console.log(h);
+    console.log(d - h + '\n' + h);
   }
 } 
 </script>
@@ -397,7 +396,7 @@ if(n == 1) {
 }
 while(n != 1) {
   if(n % 2 == 1) {
-    console.log(`${n}*3+1==${n * 3 + 1}`);
+    console.log(`${n}*3+1=${n * 3 + 1}`);
     n = n * 3 + 1;
   }
   if(n %2 == 0) {
@@ -473,9 +472,7 @@ for(let i = 49;i < 729;i++) {
   t9 = Math.floor((i - 81 * h9) / 9);
   o9 = (i - 81 * h9 - 9 * t9);
   if(h7 == o9 && o7 == h9) {
-    console.log(i);
-    console.log(h7 + '' + t7 + "" + o7);
-    console.log(h9 + '' + t9 + "" + o9);
+    console.log(i + "\n" + h7 + '' + t7 + "" + o7 + "\n" + h9 + '' + t9 + "" + o9);
   }
 }  
 </script>
@@ -545,6 +542,7 @@ console.log(nag + out);
 var n = Number(prompt());
 var m = Number(prompt());
 var a = [];
+var b = [];
 for(let i = 0; i < n;i++) {
   a[i] = false;
 }
@@ -555,9 +553,10 @@ for(let i = 2;i <= m;i++) {
 }
 for(let i = 1; i < n;i++) {
   if(a[i] == false) {
-    console.log(i);
+    b.push(i);
   }
 }
+console.log(b.join(","));
 </script>
 
 <script id="ch0105/32">
@@ -712,7 +711,6 @@ if(style == 0){
 }
 for(let i = 0 ;i < h;i++) {
   a[i].push("\n");
-  console.log(a[i]);
   a[i] = a[i].join("");
 }
 var out = a.join("");
