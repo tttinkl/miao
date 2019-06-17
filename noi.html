@@ -763,7 +763,163 @@ sum = sum + i * n;
 console.log(sum);
 </script>
 
+<script id="7">
+  var a = prompt();
+  if(+a % 7 == 0 ) {
+    console.log("YES");
+  }else {
+    a = a.split("");
+    for(let i = 0;i < a.length;i++) {
+      if(a[i] == 7) {
+        console.log("YES");
+        break
+      }
+      console.log("NO");
+    }
+  }
+</script>
 
+<script id="sort">
+  var a = prompt();
+  var b = prompt();
+  var c = prompt();
+  var t;
+  if(a > b) {
+    t = a;
+    a = b;
+    b = t;
+  }
+  if(b > c) {
+    t = b;
+    b = c;
+    c = t;
+  }
+  if(a > b) {
+    t = a;
+    a = b;
+    b = t;
+  }
+  console.log(a + b + c);
+</script>
 
+<script id="narcissistic">
+  var n = prompt();
+  var x = n.split("");
+  var a = Math.pow(+x[0],3) + Math.pow(+x[1],3) + Math.pow(+x[2],3);
+  if(a == n) {
+    console.log("YES");
+  }else {
+    console.log("NO");
+  }
+</script>
 
+<script id="narcissistic">
+  for(i = 100;i < 1000;i++) {
+    i = i.toString();
+    var x = i.split("");
+    var a = Math.pow(+x[0],3) + Math.pow(+x[1],3) + Math.pow(+x[2],3);
+    if(a == i) {
+      console.log(i);
+    }
+  }
+</script>
 
+<script id="palindrom">
+  var ret = "YES"
+  var n = prompt();
+  var l = n.length;
+  if(l % 2 == 0) {
+    var na = n.split("").slice(0,l / 2)
+    var nb = n.split("").slice(l / 2);
+    nb.reverse();
+    for(i = 0;i < na.length;i++) {
+      if(na[i] != nb[i]) {
+        ret = "NO";
+      }
+    }
+  }
+  if(l % 2 == 1) {
+    var na = n.split("").slice(0,(l - 1) / 2)
+    var nb = n.split("").slice((l + 1) / 2);
+    nb.reverse();
+    for(i = 0;i < na.length;i++) {
+      if(na[i] != nb[i]) {
+        ret = "NO";
+      }
+    }
+  }
+  console.log(ret);
+</script>
+
+<script id="weekday">
+  
+</script>
+
+<script id="complete-numbers">
+  var n = +prompt();
+  var sum = 0;
+  for(let i = 0;i < n;i++) {
+    if(n % i == 0) {
+      sum += i;
+    }
+  }
+  if(sum == n) {
+    console.log("YES");
+  }else {
+    console.log("NO");
+  }
+ </script> 
+
+ <script id="prime">
+  var n = +prompt();
+  var ret = "YES";
+  if(n == 1) {
+    console.log("NO")
+  }
+  if(n == 2) {
+    console.log("YES");
+  }
+  var i = 2;
+  while(i < n) {
+    if((n % i) == 0) {
+      ret = "NO";
+    }
+      i++;
+  }
+  console.log(ret);
+ </script>
+
+ <script id="primes">
+  var ret = 0;
+  console.log(2);
+  for(i = 3;i < 100;i++) {
+    ret = 0;
+    for(j = 2;j < i;j++) {
+      if(i % j == 0) {
+        ret = 1;
+      }
+    }
+    if(ret == 0) {
+      console.log(i);
+    }
+  }
+ </script>
+
+<script id="itob"> 
+  var n = prompt();
+  console.log(n);
+</script>
+
+<script id="lcf&lcm">
+  var a = +prompt();
+  var b = +prompt();
+  var lcf = 0,lcm = 0;
+  for(i = 1;i <= a < b? a :b;i++) {
+    
+  }
+</script>
+
+<script id="sqrt">
+  var n = prompt();
+  console.log(Math.sqrt(+n).toFixed(3));
+</script>   
