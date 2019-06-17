@@ -799,7 +799,7 @@ console.log(sum);
     a = b;
     b = t;
   }
-  console.log(a + b + c);
+  console.log(a + " " b + " " + c);
 </script>
 
 <script id="narcissistic">
@@ -813,7 +813,7 @@ console.log(sum);
   }
 </script>
 
-<script id="narcissistic">
+<script id="narcissistics">
   for(i = 100;i < 1000;i++) {
     i = i.toString();
     var x = i.split("");
@@ -856,12 +856,12 @@ console.log(sum);
   var month = +prompt();
   var a = new Date();
   a.setFullYear(year);
-  a.setMonth(month);
+  a.setMonth(month - 1);
   a.setDate(1);
   console.log(a.getDay());
 </script>
 
-<script id="complete-numbers">
+<script id="complete-number">
   var n = +prompt();
   var sum = 0;
   for(let i = 0;i < n;i++) {
@@ -875,6 +875,20 @@ console.log(sum);
     console.log("NO");
   }
  </script> 
+
+ <script id="complete-numbers">
+  for(let i = 1;i < 1000;i++) {
+    var sum = 0;
+    for(let j = 1;j < i;j++) {
+      if( i % j == 0) {
+        sum += j;
+      }
+    }
+    if(sum == i) {
+      console.log(i);
+    }
+  }
+</script>
 
  <script id="prime">
   var n = +prompt();
@@ -936,7 +950,7 @@ console.log(sum);
       break;
     }
   }
-  console.log(lcf + " " + lcm);
+  console.log(lcm + " " + lcf);
 </script>
 
 <script id="sqrt">
