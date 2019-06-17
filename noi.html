@@ -852,7 +852,13 @@ console.log(sum);
 </script>
 
 <script id="weekday">
-  
+  var year = +prompt();
+  var month = +prompt();
+  var a = new Date();
+  a.setFullYear(year);
+  a.setMonth(month);
+  a.setDate(1);
+  console.log(a.getDay());
 </script>
 
 <script id="complete-numbers">
