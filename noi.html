@@ -385,7 +385,7 @@ while(i--) {
   h = h * 0.5;
   d += h;
   if(i == 0) {
-    console.log(d - h + '\n' + h + '\n');
+    console.log((d - h).toFixed(4) + '\n' + h.toFixed(7) + '\n');
   }
 } 
 </script>
@@ -712,6 +712,9 @@ if(style == 0){
 }
 for(let i = 0 ;i < h;i++) {
   a[i].push("\n");
+}
+a[h-1].pop();
+for(let i = 0 ;i < h;i++) {
   a[i] = a[i].join("");
 }
 var out = a.join("");
