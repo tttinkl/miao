@@ -913,10 +913,24 @@ console.log(sum);
 <script id="lcf&lcm">
   var a = +prompt();
   var b = +prompt();
-  var lcf = 0,lcm = 0;
-  for(i = 1;i <= a < b? a :b;i++) {
-    
+  if(a > b) {
+    var t = a;
+    a = b;
+    b = t;
   }
+  var lcf = 0,lcm = 0;
+  for(let i = 1;i <= a;i++) {
+    if(a % i == 0 && b % i ==0) {
+      lcf = i;
+    }
+  }
+  for(let i = 1;;i++) {
+    if(i * b % a == 0) {
+      lcm = i * b;
+      break;
+    }
+  }
+  console.log(lcf + " " + lcm);
 </script>
 
 <script id="sqrt">
