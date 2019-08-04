@@ -11,12 +11,26 @@ var tttinkl = function() {
       return ary.filter(it => it)
     }
 
-    function concat(array,values) {
-      return ary.concat(...values)
+    function concat(array,...values) {
+      var ret = Array.from(array);
+      for(let i = 0; i < values.length;i++) {
+        if(typeof(values[i]) == "number") ret.push(values[i]);
+        else {
+          ret.push(...values[i]);
+        }
+      }
+      return ret;
     }
 
-    function diffrence(ary,values) {
-
+    function diffrence(ary,...values) {
+      var ret = [];
+      var value = concat(values);
+      for(let i = 0;i < ary.length;i++) {
+        for(let j = 0;i < values.length;i++) {
+          if(values[j] != ary[i]) ret.push(ary[i]);
+        }
+      }
+      return ret;
     }
 
     function diffrenceBy(ary,values) {
@@ -33,7 +47,14 @@ var tttinkl = function() {
       return ary;
     }
 
-    dropRightWhile(array,)
+    function dropRightWhile() {
+      
+    }
+
+    function dropRightWhile(array,) {
+
+    }
+
 
 
 
