@@ -24,7 +24,11 @@ var tttinkl = function() {
 
     function diffrence(ary,...values) {
       var ret = [];
-      var value = concat(values);
+      var value = [];
+      for(let i = 0; i < values.length;i++) {
+        value = value.concat(values[i]);
+      }
+
       for(let i = 0;i < ary.length;i++) {
         for(let j = 0;i < values.length;i++) {
           if(values[j] != ary[i]) ret.push(ary[i]);
@@ -33,7 +37,7 @@ var tttinkl = function() {
       return ret;
     }
 
-    function diffrenceBy(ary,values) {
+    function diffrenceBy(ary,values,) {
 
     }
 
@@ -48,12 +52,29 @@ var tttinkl = function() {
     }
 
     function dropRightWhile() {
-      
+
     }
 
     function dropRightWhile(array,) {
 
     }
+
+    function matches(src) {
+      function isMatch(obj,src) {
+        if(obj === src) return true;
+        for(let k in src) {
+          if(typeof(src[k]) == "object" && src[k] != null) {
+            if(!isMatch(obj[k],src[k])) return false;
+          }else {
+            if(src[k] != obj[k]) return false
+          }
+        }
+        return true;
+      }
+      return function(obj) {
+        return isMatch(obj,src);
+      }
+    }  
 
 
 
