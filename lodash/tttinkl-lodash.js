@@ -144,5 +144,8 @@ var tttinkl = function() {
       diffrenceBy,
       drop,
       dropRight,
+      flip,
+      curry,
+      toPath,
     }
 }();
