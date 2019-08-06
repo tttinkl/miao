@@ -42,13 +42,14 @@ var tttinkl = function() {
     }
 
     function drop(ary,n = 1) {
-      ary.splice(0,n);
-      return ary;
+      // ary.splice(0,n);
+      // return ary;
+
     }
 
     function dropRight(array,n = 1) {
-      ary.splice(ary.length - n);
-      return ary;
+      // ary.splice(ary.length - n);
+      // return ary;
     }
 
     function dropRightWhile() {
@@ -74,9 +75,65 @@ var tttinkl = function() {
       return function(obj) {
         return isMatch(obj,src);
       }
-    }  
+    }
 
+    function matchesProperty(path,srcValue) {
+      return function(obj) {
+        return isEqual(get(obj,path,))
+      }
+    }
 
+    function bind(f,thisArg,...fixedArgs) {
+      return function() {
+
+      }
+    }
+
+    function get(obj,path,defaultVal) {
+      var path = toPath(path);
+      for(let i = 0;i < a.length;i++) {
+        if(obj === undefined) return defaultVal;
+        obj = obj[path[i]];
+      }
+      return obj;
+    }
+
+    function property(path) {
+      return function(obj) {
+        return get(obj,path);
+      }
+    }
+
+    function toPath(str) {//a.b.c.d[foo].d
+      return str.split(/\.|\[|\]./g);
+    }
+
+    function compose(funcs) {
+      return function(...args) {
+        var value = funcs[0](...args)
+        for(var i = 1; i < funcs.length; i++) {
+          value = funcs[i](value)
+        }
+        return value
+      }
+    }
+
+    function curry(f,length = f.length) {
+      return function(...args) {
+        if (args.length >= length) {
+          return f(...args);
+        } else {
+          return curry(f.bind(null,...args),length - args.length);
+        }
+      }
+    }
+
+    function flip(func) {
+      return function(...args) {
+        args.reverse();
+        return func(...args);
+      }
+    }
 
 
     return {
