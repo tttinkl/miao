@@ -42,9 +42,8 @@ var tttinkl = function() {
     }
 
     function drop(ary,n = 1) {
-      // ary.splice(0,n);
-      // return ary;
-
+      ary.splice(0,n);
+      return ary;
     }
 
     function dropRight(array,n = 1) {
@@ -61,7 +60,13 @@ var tttinkl = function() {
     }
 
     function matches(src) {
-      function isMatch(obj,src) {
+      
+      return function(obj) {
+        return isMatch(obj,src);
+      }
+    }
+
+    function isMatch(obj,src) {
         if(obj === src) return true;
         for(let k in src) {
           if(typeof(src[k]) == "object" && src[k] != null) {
@@ -71,10 +76,6 @@ var tttinkl = function() {
           }
         }
         return true;
-      }
-      return function(obj) {
-        return isMatch(obj,src);
-      }
     }
 
     function matchesProperty(path,srcValue) {
@@ -84,8 +85,9 @@ var tttinkl = function() {
     }
 
     function bind(f,thisArg,...fixedArgs) {
-      return function() {
-
+      return function(...args) {
+        var ARGS = [...fixedArgs,...args]
+        return f.apply(thisArg,...ARGS)
       }
     }
 
@@ -102,6 +104,7 @@ var tttinkl = function() {
       return function(obj) {
         return get(obj,path);
       }
+
     }
 
     function toPath(str) {//a.b.c.d[foo].d
@@ -144,8 +147,17 @@ var tttinkl = function() {
       diffrenceBy,
       drop,
       dropRight,
-      flip,
-      curry,
+      dropRightWhile,
+      dropRightWhile,
+      matches,
+      isMatch,
+      matchesProperty,
+      bind,
+      get,
+      property,
       toPath,
+      compose,
+      curry,
+      flip,
     }
 }();
