@@ -127,6 +127,7 @@ var tttinkl = function() {
     }
 
     function toPath(str) {//a.b.c.d[foo].d
+      if(str instanceof Array) return str;
       return str.split(/\.|\[|\]./g);
     }
 
