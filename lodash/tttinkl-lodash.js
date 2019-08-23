@@ -22,7 +22,7 @@ var tttinkl = function() {
       return ret;
     }
 
-    function diffrence(ary,...values) {
+    function difference(ary,...values) {
       var ret = [];
       var value = [];
       for(let i = 0; i < values.length;i++) {
@@ -37,8 +37,27 @@ var tttinkl = function() {
       return ret;
     }
 
-    function diffrenceBy(ary,values,) {
+    function differenceBy(ary,values,iteratee = identity) {
+      var ret = [];
+      var value = [];
+      for(let i = 0; i < values.length;i++) {
+        value = value.concat(values[i]);
+      }
 
+      for(let i = 0;i < ary.length;i++) {
+        for(let j = 0;i < values.length;i++) {
+          if(typeof iteratee == "function") {
+            if(iteratee(values[j]) != iteratee(ary[i])) ret.push(ary[i]);
+          }else {
+            if(property(values[j]) != property(ary[i])) ret.push(ary[i]);
+          }
+        }
+      }
+      return ret;
+    }
+
+    function identity(value) {
+      return value;
     }
 
     function drop(ary,n = 1) {
@@ -93,7 +112,7 @@ var tttinkl = function() {
 
     function get(obj,path,defaultVal) {
       var path = toPath(path);
-      for(let i = 0;i < a.length;i++) {
+      for(let i = 0;i < path.length;i++) {
         if(obj === undefined) return defaultVal;
         obj = obj[path[i]];
       }
@@ -143,8 +162,8 @@ var tttinkl = function() {
       chunk,
       compact,
       concat,
-      diffrence,
-      diffrenceBy,
+      difference,
+      differenceBy,
       drop,
       dropRight,
       dropRightWhile,
