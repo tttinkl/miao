@@ -28,11 +28,14 @@ var tttinkl = function() {
       for(let i = 0; i < values.length;i++) {
         value = value.concat(values[i]);
       }
-
       for(let i = 0;i < ary.length;i++) {
-        for(let j = 0;i < values.length;i++) {
-          if(values[j] != ary[i]) ret.push(ary[i]);
+         var flag = 0;
+        for(let j = 0;j < value.length;j++) {
+          if(value[j] == ary[i]) {
+            flag = 1;
+          }
         }
+        if(flag == 0) ret.push(ary[i]);
       }
       return ret;
     }
@@ -45,13 +48,15 @@ var tttinkl = function() {
       }
 
       for(let i = 0;i < ary.length;i++) {
-        for(let j = 0;i < values.length;i++) {
+        var flag = 0;
+        for(let j = 0;j < value.length;j++) {
           if(typeof iteratee == "function") {
-            if(iteratee(values[j]) != iteratee(ary[i])) ret.push(ary[i]);
+            if(iteratee(value[j]) == iteratee(ary[i])) flag = 1;
           }else {
-            if(property(values[j]) != property(ary[i])) ret.push(ary[i]);
+            if(property(value[j]) == property(ary[i])) flag = 1;
           }
         }
+        if(flag == 0) ret.push(ary[i]);
       }
       return ret;
     }
