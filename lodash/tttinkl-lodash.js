@@ -109,9 +109,11 @@ var tttinkl = function() {
       return ary;
     }
 
-    function dropRight(array,n = 1) {
-      ary.splice(ary.length - n);
-      return ary;
+    function dropRight(ary,n = 1) {
+      if(n < ary.length) {
+        ary.splice(ary.length - n);
+        return ary;
+      }else return [];
     }
 
     function dropRightWhile() {
@@ -120,6 +122,20 @@ var tttinkl = function() {
 
     function dropRightWhile(array,) {
 
+    }
+
+    function iteratee() {
+
+    }
+
+    function wrap(value,wrapper = identity) {
+      return function(...args) {
+        return wrapper(value,...args);
+      }
+    }
+
+    function escape(str = "") {
+      return str.replace("<","&lt;").replace(">","$gt;").replace("&","&amp;").replace("'","&#39;");
     }
 
     function matches(src) {
@@ -212,7 +228,9 @@ var tttinkl = function() {
       drop,
       dropRight,
       dropRightWhile,
-      dropRightWhile,
+      iteratee,
+      wrap,
+      escape,
       matches,
       isMatch,
       matchesProperty,
