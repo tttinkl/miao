@@ -128,6 +128,14 @@ var tttinkl = function() {
 
     }
 
+    function filter(collection,predicate = identity) {
+      var ret = [];
+    }
+
+    function isArray(value) {
+      return Array.isArray(value);
+    }
+
     function wrap(value,wrapper = identity) {
       return function(...args) {
         return wrapper(value,...args);
@@ -229,6 +237,7 @@ var tttinkl = function() {
       dropRight,
       dropRightWhile,
       iteratee,
+      isArray,
       wrap,
       escape,
       matches,
