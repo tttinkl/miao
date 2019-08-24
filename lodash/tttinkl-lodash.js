@@ -131,12 +131,7 @@ var tttinkl = function() {
     function filter(collection,predicate = identity) {
       var ret = [];
       var func = isArray(collection) ? arrayFilter : baseFilter;
-      each(collection,function(value,index,collection) {
-        if (func(value,index,collection,predicate)) {
-          ret.push(value);
-        }
-      })
-      return ret;
+      return func(collection,predicate);
     }
 
     function arrayFilter(array,predicate) {
