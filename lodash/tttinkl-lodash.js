@@ -130,7 +130,54 @@ var tttinkl = function() {
 
     function filter(collection,predicate = identity) {
       var ret = [];
+      var func = isArray(collection) ? arrayFilter : baseFilter;
+      each(collection,function(value,index,collection) {
+        if (func(value,index,collection,predicate)) {
+          ret.push(value);
+        }
+      })
+      return ret;
     }
+
+    function arrayFilter(array,predicate) {
+      var index = -1,
+          length = array == null ? 0 : array.length,
+          resIndex = 0,
+          result = [];
+      while(++index < length) {
+        var value = array[index];
+        if(predicate(value,index,array)) {
+          result[resIndex++] = value;
+        }
+      }
+      return result;
+    }
+
+    function baseFilter(collection,predicate) {
+      var result = [];
+      each(collection,function(value,index,collection) {
+        if (predicate(value,index,collection)) {
+          result.push(value);
+        }
+      });
+      return resultl
+    }
+
+    function each(collection,iteratee = identity) {
+      if (isArray(collection)) {
+        for(let i = 0; i < collection.length;i++) {
+          var f = iteratee(collection[i],i,collection);
+          if(f === false) return;
+        }
+      }else {
+        for(let k in collection) {
+          var f = iteratee(collection[k],k,collection);
+          if(f === false) return;
+        }
+      }
+    }
+
+    var forEach = each;
 
     function isArray(value) {
       return Array.isArray(value);
@@ -237,6 +284,9 @@ var tttinkl = function() {
       dropRight,
       dropRightWhile,
       iteratee,
+      filter,
+      each,
+      forEach,
       isArray,
       wrap,
       escape,
