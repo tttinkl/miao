@@ -78,7 +78,26 @@ var tttinkl = function() {
           if(isEqual(value[k],other[k]) == false) return false;
         }
         return true;
+
       }else return false;
+    }
+
+    function differenceWith(ary,...args) {
+      var ret = [];
+      var value = [];
+      for(let i = 0; i < args.length - 1;i++) {
+        value = value.concat(args[i]);
+      }
+      for(let i = 0;i < ary.length;i++) {
+         var flag = 0;
+        for(let j = 0;j < value.length;j++) {
+          if(args[args.length - 1](value[i],ary[i])) {
+            flag = 1;
+          }
+        }
+        if(flag == 0) ret.push(ary[i]);
+      }
+      return ret;
     }
 
     function identity(value) {
@@ -91,8 +110,8 @@ var tttinkl = function() {
     }
 
     function dropRight(array,n = 1) {
-      // ary.splice(ary.length - n);
-      // return ary;
+      ary.splice(ary.length - n);
+      return ary;
     }
 
     function dropRightWhile() {
@@ -189,6 +208,7 @@ var tttinkl = function() {
       difference,
       differenceBy,
       isEqual,
+      differenceWith,
       drop,
       dropRight,
       dropRightWhile,
