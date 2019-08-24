@@ -40,25 +40,45 @@ var tttinkl = function() {
       return ret;
     }
 
-    function differenceBy(ary,values,iteratee = identity) {
+    function differenceBy(ary,...args) {
+      if(typeof arguments[arguments.length - 1] == "function") {
+        var iteratee = arguments[arguments.length - 1];
+      }else if(arguments[arguments.length - 1] instanceof Array) {
+        iteratee = identity;
+        args[args.length] = iteratee;
+      }else {
+        iteratee = property(arguments[arguments.length - 1]);
+      }
       var ret = [];
       var value = [];
-      for(let i = 0; i < values.length;i++) {
-        value = value.concat(values[i]);
+      for(let i = 0; i < args.length - 1;i++) {
+        value = value.concat(args[i]);
       }
-
       for(let i = 0;i < ary.length;i++) {
-        var flag = 0;
+         var flag = 0;
         for(let j = 0;j < value.length;j++) {
-          if(typeof iteratee == "function") {
-            if(iteratee(value[j]) == iteratee(ary[i])) flag = 1;
-          }else {
-            if(property(value[j]) == property(ary[i])) flag = 1;
+          if(iteratee(value[j]) == iteratee(ary[i])) {
+            flag = 1;
           }
         }
         if(flag == 0) ret.push(ary[i]);
       }
       return ret;
+    }
+
+    function isEqual(value,other) {
+      if(value === other) return true;
+      if(value == null && other == null) return true;
+      if(value == null || other == null) return false;
+      if(typeof value === "object") {
+        for(let k in value) {
+          if(isEqual(value[k],other[k]) == false) return false;
+        }
+        for(let k in other) {
+          if(isEqual(value[k],other[k]) == false) return false;
+        }
+        return true;
+      }else return false;
     }
 
     function identity(value) {
@@ -84,7 +104,6 @@ var tttinkl = function() {
     }
 
     function matches(src) {
-      
       return function(obj) {
         return isMatch(obj,src);
       }
@@ -128,7 +147,6 @@ var tttinkl = function() {
       return function(obj) {
         return get(obj,path);
       }
-
     }
 
     function toPath(str) {//a.b.c.d[foo].d
@@ -170,6 +188,7 @@ var tttinkl = function() {
       concat,
       difference,
       differenceBy,
+      isEqual,
       drop,
       dropRight,
       dropRightWhile,
