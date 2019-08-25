@@ -144,6 +144,43 @@ var tttinkl = function() {
       }
     }
 
+    function head(array) {
+      return array[0];
+    }
+    var first = head;
+
+    function baseFlatten(array,depth = Infinity) {
+      if(depth < 1) return [];
+      var result = [];
+      for(let i = 0; i < array.length; i++) {
+        if(isArray(array[i])) {
+          result.push(...baseFlatten(array[i],depth - 1));
+        }
+        else result.push(array[i]);
+      }
+      return result;
+    }
+
+    function flatten(array) {
+      var result = [];
+      for(let i = 0; i < array.length; i++) {
+        if(isArray(array[i])) {
+          result.push(...array[i]);
+        }else {
+          result.push(array[i]);
+        }
+      }
+      return result;
+    }
+
+    function flattenDeep(array) {
+      return baseFlatten(array);
+    }
+
+    function flattenDepth(array,depth = 1) {
+      return baseFlatten(array,depth);
+    }
+
     function differenceWith(ary,...args) {
       var ret = [];
       var value = [];
@@ -161,8 +198,6 @@ var tttinkl = function() {
       }
       return ret;
     }
-
-
 
     function drop(ary,n = 1) {
       ary.splice(0,n);
@@ -197,7 +232,6 @@ var tttinkl = function() {
     }
 
     function baseWhile(array,predicate,isDrop,fromRight) {
-
       var iteratee = getIteratee(predicate);
       var idx = fromRight ? array.length : -1;
       while((fromRight ? --idx : ++ idx < array.length)) {
@@ -406,5 +440,11 @@ var tttinkl = function() {
       find,
       findLastIndex,
       findLast,
+      flatten,
+      baseFlatten,
+      flattenDeep,
+      flattenDepth,
+      head,
+      first,
     }
 }();
