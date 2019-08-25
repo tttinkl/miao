@@ -1,4 +1,5 @@
 var tttinkl = function() {
+    
     function chunk(ary,n) {
       var ret = [];
       while(ary.length != 0) {
@@ -116,13 +117,21 @@ var tttinkl = function() {
       }else return [];
     }
 
-    function dropRightWhile() {
+    function dropRightWhile(array,predicate = identity) {
 
     }
 
-    function dropRightWhile(array,) {
+    function dropWhile(array,) {
 
     }
+
+    function takeWhile() {
+
+    }
+
+    function baseWhile(array,predicate,idDrop,formRight) {
+
+    } 
 
     function iteratee(func = identity) {
       if(isFunction(func)) return func;
@@ -132,7 +141,7 @@ var tttinkl = function() {
     }
 
     function isObject(value) {
-      return (typeof value === "object" || typeof value == "function")
+      return (typeof value === "object" || typeof value == "function" && value !== null)
     }
 
     function isFunction(value) {
@@ -185,6 +194,7 @@ var tttinkl = function() {
     }
 
     function each(collection,iteratee = identity) {
+      iteratee = this.iteratee(iteratee);
       if (isArray(collection)) {
         for(let i = 0; i < collection.length;i++) {
           var f = iteratee(collection[i],i,collection);
@@ -304,6 +314,8 @@ var tttinkl = function() {
       drop,
       dropRight,
       dropRightWhile,
+      dropWhile,
+      takeWhile,
       iteratee,
       isObject,
       isFunction,
