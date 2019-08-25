@@ -136,19 +136,21 @@ var tttinkl = function() {
       return iteratee(predicate);
     }
 
-    function baseWhile(array,predicate,idDrop,fromRight) {
+    function baseWhile(array,predicate,isDrop,fromRight) {
 
       var iteratee = getIteratee(predicate);
       var idx = fromRight ? array.length : -1;
       while((fromRight ? --idx : ++ idx)) {
-        if(!iteratee(array[idx])) break;
+        if(!iteratee([array[idx]],idx,[array[idx]])) {
+          break;
+        }
       }
-      if(idDrop) {
-        
+      console.log(idx);
+      if(isDrop) {
         return fromRight ? array.splice(0,idx + 1) : array.splice(idx);
       }
       else {
-        return fromRight ? array.slice(0,idx + 1) : array.slice(idx);
+        return fromRight ? array.slice(idx) : array.slice(0,idx + 1);
       }
     } 
 
@@ -331,6 +333,7 @@ var tttinkl = function() {
       differenceBy,
       isEqual,
       differenceWith,
+      getIteratee,
       drop,
       dropRight,
       baseWhile,
