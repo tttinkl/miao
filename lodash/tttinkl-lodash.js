@@ -126,8 +126,8 @@ var tttinkl = function() {
 
     function iteratee(func = identity) {
       if(isFunction(func)) return func;
+      if(isArray(func)) return matchesProperty(func[0],func[1]);
       if(isObject(func)) return matches(func);
-      if(isArray(func)) return matchesProperty(func)
       if(typeof func === "string") return property(func);
     }
 
