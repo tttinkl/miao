@@ -1,4 +1,48 @@
 var tttinkl = function() {
+    function identity(value) {
+      return value;
+    }
+
+    function isObject(value) {
+      return ((typeof value === "object" || typeof value == "function") && value !== null)
+    }
+
+    function isFunction(value) {
+      return Object.prototype.toString.call(value) === "[object Function]";
+    }
+
+    function isArray(value) {
+      return Array.isArray(value);
+    }
+
+    function isMatch(obj,src) {
+        if(obj === src) return true;
+        for(let k in src) {
+          if(typeof(src[k]) == "object" && src[k] != null) {
+            if(!isMatch(obj[k],src[k])) return false;
+          }else {
+            if(src[k] != obj[k]) return false
+          }
+        }
+        return true;
+    }
+
+    function isEqual(value,other) {
+      if(value === other) return true;
+      if(value == null && other == null) return true;
+      if(value == null || other == null) return false;
+      if(typeof value === "object") {
+        for(let k in value) {
+          if(isEqual(value[k],other[k]) == false) return false;
+        }
+        for(let k in other) {
+          if(isEqual(value[k],other[k]) == false) return false;
+        }
+        return true;
+
+      }else return false;
+    }
+
     function chunk(ary,n) {
       var ret = [];
       while(ary.length != 0) {
@@ -66,20 +110,38 @@ var tttinkl = function() {
       return ret;
     }
 
-    function isEqual(value,other) {
-      if(value === other) return true;
-      if(value == null && other == null) return true;
-      if(value == null || other == null) return false;
-      if(typeof value === "object") {
-        for(let k in value) {
-          if(isEqual(value[k],other[k]) == false) return false;
-        }
-        for(let k in other) {
-          if(isEqual(value[k],other[k]) == false) return false;
-        }
-        return true;
+    function fill(array,value,start = 0,end = array.length) {
+      for(let i = start; i < end; i++) {
+        array[i] = value;
+      }
+      return array;
+    }
 
-      }else return false;
+    function findIndex(array,predicate = identity,fromIndex = 0) {
+      var iteratee = getIteratee(predicate);
+      for(let i = fromIndex; i < array.length; i++) {
+        if(iteratee(array[i])) return i;
+      }
+    }
+    function findLastIndex(array,predicate = identity,fromIndex = array.length - 1) {
+      var iteratee = getIteratee(predicate);
+      for(let i = fromIndex; i >= 0; i--) {
+        if(iteratee(array[i])) return i;
+      }
+    }
+
+    function find(array,predicate = identity,fromIndex = 0) {
+      var iteratee = getIteratee(predicate);
+      for(let i = fromIndex;i < array.length; i++) {
+        if(iteratee(array[i])) return array[i];
+      }
+    }
+
+    function findLast(array,predicate = identity,fromIndex = array.length - 1) {
+      var iteratee = getIteratee(predicate);
+      for(let i = fromIndex; i >= 0; i--) {
+        if(iteratee(array[i])) return array[i];
+      }
     }
 
     function differenceWith(ary,...args) {
@@ -100,9 +162,7 @@ var tttinkl = function() {
       return ret;
     }
 
-    function identity(value) {
-      return value;
-    }
+
 
     function drop(ary,n = 1) {
       ary.splice(0,n);
@@ -162,13 +222,7 @@ var tttinkl = function() {
       if(typeof func === "string") return property(func);
     }
 
-    function isObject(value) {
-      return (typeof value === "object" || typeof value == "function" && value !== null)
-    }
 
-    function isFunction(value) {
-      return Object.prototype.toString.call(value) === "[object Function]";
-    }
 
     function map(collection,iteratee = identity) {
       iteratee = isFunction(arguments[1]) ? arguments[1] : getIteratee(arguments[1]);
@@ -233,9 +287,7 @@ var tttinkl = function() {
 
     var forEach = each;
 
-    function isArray(value) {
-      return Array.isArray(value);
-    }
+
 
     function wrap(value,wrapper = identity) {
       return function(...args) {
@@ -251,18 +303,6 @@ var tttinkl = function() {
       return function(obj) {
         return isMatch(obj,src);
       }
-    }
-
-    function isMatch(obj,src) {
-        if(obj === src) return true;
-        for(let k in src) {
-          if(typeof(src[k]) == "object" && src[k] != null) {
-            if(!isMatch(obj[k],src[k])) return false;
-          }else {
-            if(src[k] != obj[k]) return false
-          }
-        }
-        return true;
     }
 
     function matchesProperty(path,srcValue) {
@@ -362,5 +402,9 @@ var tttinkl = function() {
       compose,
       curry,
       flip,
+      findIndex,
+      find,
+      findLastIndex,
+      findLast,
     }
 }();
