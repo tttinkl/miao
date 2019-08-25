@@ -132,7 +132,7 @@ var tttinkl = function() {
     }
 
     function isObject(value) {
-      return Object.prototype.toString.call(value) === "[object Object]";
+      return (typeof value === "object" || typeof value == "function")
     }
 
     function isFunction(value) {
@@ -157,7 +157,7 @@ var tttinkl = function() {
     function filter(collection,predicate = identity) {
       var ret = [];
       var func = isArray(collection) ? arrayFilter : baseFilter;
-      return func(collection,predicate);
+      return func(collection,iteratee(predicate));
     }
 
     function arrayFilter(array,predicate) {
