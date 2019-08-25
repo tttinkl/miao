@@ -140,14 +140,15 @@ var tttinkl = function() {
 
       var iteratee = getIteratee(predicate);
       var idx = fromRight ? array.length : -1;
-      while((fromRight ? --idx : ++ idx)) {
-        if(!iteratee([array[idx]],idx,[array[idx]])) {
+      while((fromRight ? --idx : ++ idx < array.length)) {
+        if(iteratee(array[idx],idx,array) === false) {
+          console.log(idx,iteratee(array[idx],idx,array));
           break;
         }
       }
-      console.log(idx);
+      
       if(isDrop) {
-        return fromRight ? array.splice(0,idx + 1) : array.splice(idx);
+        return fromRight ? array.slice(0,idx + 1) : array.slice(idx);
       }
       else {
         return fromRight ? array.slice(idx) : array.slice(0,idx + 1);
