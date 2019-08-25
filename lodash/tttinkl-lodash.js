@@ -124,8 +124,34 @@ var tttinkl = function() {
 
     }
 
-    function iteratee() {
+    function iteratee(func = identity) {
+      if(isFunction(func)) return func;
+      if(isObject(func)) return matches(func);
+      if(isArray(func)) return matchesProperty(func)
+      if(typeof func === "string") return property(func);
+    }
 
+    function isObject(value) {
+      return Object.prototype.toString.call(value) === "[object Object]";
+    }
+
+    function isFunction(value) {
+      return Object.prototype.toString.call(value) === "[object Function]";
+    }
+
+    function map(collection,iteratee = identity) {
+      iteratee = isFunction(arguments[1]) ? arguments[1] : this.iteratee(arguments[1]);
+      var result = [];
+      if(isArray(collection)) {
+        for(let i = 0; i < collection.length; i++) {
+          result.push(iteratee(collection[i],i,collection));
+        }
+      }else {
+        for(let k in collection) {
+          result.push(iteratee(collection[k],k,collection))
+        }
+      }
+      return result;
     }
 
     function filter(collection,predicate = identity) {
@@ -208,7 +234,7 @@ var tttinkl = function() {
 
     function matchesProperty(path,srcValue) {
       return function(obj) {
-        return isEqual(get(obj,path,))
+        return isEqual(get(obj,path),srcValue)
       }
     }
 
@@ -279,6 +305,9 @@ var tttinkl = function() {
       dropRight,
       dropRightWhile,
       iteratee,
+      isObject,
+      isFunction,
+      map,
       filter,
       each,
       forEach,
