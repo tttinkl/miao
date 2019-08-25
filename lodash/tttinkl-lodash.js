@@ -1,5 +1,4 @@
 var tttinkl = function() {
-    
     function chunk(ary,n) {
       var ret = [];
       while(ary.length != 0) {
@@ -118,19 +117,39 @@ var tttinkl = function() {
     }
 
     function dropRightWhile(array,predicate = identity) {
-
+      return baseWhile(array,predicate,true,true);
     }
 
-    function dropWhile(array,) {
-
+    function dropWhile(array,predicate) {
+      return baseWhile(array,predicate,true,false);
     }
 
-    function takeWhile() {
-
+    function takeWhile(array,predicate) {
+      return baseWhile(array,predicate,false,false);
     }
 
-    function baseWhile(array,predicate,idDrop,formRight) {
+    function takeRightWhile(array,predicate) {
+      return baseWhile(array,predicate,false,true);
+    }
+ 
+    function getIteratee(predicate) {
+      return iteratee(predicate);
+    }
 
+    function baseWhile(array,predicate,idDrop,fromRight) {
+
+      var iteratee = getIteratee(predicate);
+      var idx = fromRight ? array.length : -1;
+      while((fromRight ? --idx : ++ idx)) {
+        if(!iteratee(array[idx])) break;
+      }
+      if(idDrop) {
+        
+        return fromRight ? array.splice(0,idx + 1) : array.splice(idx);
+      }
+      else {
+        return fromRight ? array.slice(0,idx + 1) : array.slice(idx);
+      }
     } 
 
     function iteratee(func = identity) {
@@ -149,7 +168,7 @@ var tttinkl = function() {
     }
 
     function map(collection,iteratee = identity) {
-      iteratee = isFunction(arguments[1]) ? arguments[1] : this.iteratee(arguments[1]);
+      iteratee = isFunction(arguments[1]) ? arguments[1] : getIteratee(arguments[1]);
       var result = [];
       if(isArray(collection)) {
         for(let i = 0; i < collection.length; i++) {
@@ -194,18 +213,19 @@ var tttinkl = function() {
     }
 
     function each(collection,iteratee = identity) {
-      iteratee = this.iteratee(iteratee);
+      iteratee = getIteratee(iteratee);
       if (isArray(collection)) {
         for(let i = 0; i < collection.length;i++) {
           var f = iteratee(collection[i],i,collection);
-          if(f === false) return;
+          if(f === false) return collection;
         }
       }else {
         for(let k in collection) {
           var f = iteratee(collection[k],k,collection);
-          if(f === false) return;
+          if(f === false) return collection;
         }
       }
+      return collection;
     }
 
     var forEach = each;
@@ -313,9 +333,11 @@ var tttinkl = function() {
       differenceWith,
       drop,
       dropRight,
+      baseWhile,
       dropRightWhile,
       dropWhile,
       takeWhile,
+      takeRightWhile,
       iteratee,
       isObject,
       isFunction,
