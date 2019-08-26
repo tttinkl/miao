@@ -450,6 +450,6 @@ var tttinkl = function() {
       flattenDepth,
       head,
       first,
-      fill,
+      fill
     }
 }();
