@@ -150,13 +150,17 @@ var tttinkl = function() {
     var first = head;
 
     function baseFlatten(array,depth = Infinity) {
-      if(depth < 1) return [];
+      if(depth < 0) return [];
       var result = [];
       for(let i = 0; i < array.length; i++) {
-        if(isArray(array[i])) {
-          result.push(...baseFlatten(array[i],depth - 1));
+        if(depth > 0) {
+          if(isArray(array[i])) {
+            result.push(...baseFlatten(array[i],depth - 1));
+          }
+          else result.push(array[i]);
+        }else {
+          result.push(array[i]);
         }
-        else result.push(array[i]);
       }
       return result;
     }
@@ -446,5 +450,6 @@ var tttinkl = function() {
       flattenDepth,
       head,
       first,
+      fill,
     }
 }();
