@@ -215,6 +215,15 @@ var tttinkl = function() {
       }else return [];
     }
 
+    function take(ary, n = 1) {
+      return ary.slice(0,n);
+    }
+
+    function takeRight(ary, n = 1) {
+      n = n > ary.length ? ary.length : n;
+      return ary.slice(ary.length - n,ary.length);
+    }
+
     function dropRightWhile(array,predicate = identity) {
       return baseWhile(array,predicate,true,true);
     }
@@ -249,7 +258,7 @@ var tttinkl = function() {
         return fromRight ? array.slice(0,idx + 1) : array.slice(idx);
       }
       else {
-        return fromRight ? array.slice(idx) : array.slice(0,idx + 1);
+        return fromRight ? array.slice(idx + 1) : array.slice(0,idx + 1);
       }
     } 
 
@@ -259,8 +268,6 @@ var tttinkl = function() {
       if(isObject(func)) return matches(func);
       if(typeof func === "string") return property(func);
     }
-
-
 
     function map(collection,iteratee = identity) {
       iteratee = isFunction(arguments[1]) ? arguments[1] : getIteratee(arguments[1]);
@@ -324,8 +331,6 @@ var tttinkl = function() {
     }
 
     var forEach = each;
-
-
 
     function wrap(value,wrapper = identity) {
       return function(...args) {
@@ -403,6 +408,70 @@ var tttinkl = function() {
       }
     }
 
+    function fromPairs(pairs) {
+      var result = {};
+      pairs.forEach(function(item) {
+        result[item[0]] = item[1];
+      });
+      return result;
+    } 
+
+    function toPairs(obj) {
+      var result = [];
+      Object.keys(obj).forEach(function(key) {
+        var cell = [];
+        cell.push(key,obj[key]);
+        result.push(cell);
+      });
+      return result;
+    }
+
+    function toPairsIn(obj) {
+      var result = [];
+      for(let key in obj) {
+        var cell = [];
+        cell.push(key,obj[key]);
+        result.push(cell);
+      }
+      return result;
+    }
+
+    function baseIndexof(array,value,isSorted = false,fromRight = false) {
+      if(!isSorted) {
+        var arr = Array.from(array);
+        arr.sort();
+      }else {
+        var arr = array;
+      }
+      var idx = arr.length >> 1,
+          l = 0,
+          r = arr.length - 1;
+      while(l < r) {
+
+      }
+
+      return idx;
+    }
+
+    function baseBinarySearch(array,value,fromRight = false) {
+
+    }
+
+    function indexOf(array) {
+
+    }
+
+    function lastIndexOf(array) {
+
+    }
+
+    function sortedIndexOf(array) {
+
+    }
+
+    function sortedLatsIndexOf(array) {
+
+    }
 
     return {
       chunk,
@@ -420,6 +489,8 @@ var tttinkl = function() {
       dropWhile,
       takeWhile,
       takeRightWhile,
+      take,
+      takeRight,
       iteratee,
       isObject,
       isFunction,
@@ -450,6 +521,9 @@ var tttinkl = function() {
       flattenDepth,
       head,
       first,
-      fill
+      fill,
+      fromPairs,
+      toPairs,
+      toPairsIn
     }
 }();
