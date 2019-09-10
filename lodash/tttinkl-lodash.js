@@ -258,7 +258,7 @@ var tttinkl = function() {
         return fromRight ? array.slice(0,idx + 1) : array.slice(idx);
       }
       else {
-        return fromRight ? array.slice(idx + 1) : array.slice(0,idx + 1);
+        return fromRight ? array.slice(idx + 1) : array.slice(0,idx);
       }
     } 
 
