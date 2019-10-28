@@ -436,7 +436,7 @@ var tttinkl = function() {
       return result;
     }
 
-    function baseIndexof(array,value,isSorted = false,fromRight = false,fromIndex) {
+    function baseIndexof(array, value, isSorted, fromRight, fromIndex) {
       if(!isSorted) {
         var arr = Array.from(array);
         arr.sort();
@@ -546,6 +546,8 @@ var tttinkl = function() {
       toPairs,
       toPairsIn,
       indexOf,
-      lastIndexOf
+      lastIndexOf,
+      sortedIndexOf,
+      sortedLatsIndexOf
     }
 }();
