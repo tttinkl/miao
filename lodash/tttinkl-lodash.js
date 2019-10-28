@@ -436,41 +436,61 @@ var tttinkl = function() {
       return result;
     }
 
-    function baseIndexof(array,value,isSorted = false,fromRight = false) {
+    function baseIndexof(array,value,isSorted = false,fromRight = false,fromIndex) {
       if(!isSorted) {
         var arr = Array.from(array);
         arr.sort();
       }else {
         var arr = array;
       }
-      var idx = arr.length >> 1,
-          l = 0,
-          r = arr.length - 1;
-      while(l < r) {
+      return baseBinarySearch(arr,value,fromRight,fromIndex);
+    }
 
+    function baseBinarySearch(array,value,fromRight = false,fromIndex) {
+      if (fromIndex == undefined) fromIndex = fromRight ? array.length - 1 : 0;
+      var left = fromRight ? 0 : fromIndex,
+          right = fromRight ? fromIndex : array.length - 1,
+          mid = (left + right) >> 1,
+          ret = -1;
+      while (left <=right) {
+        if (value < array[mid]) {
+          right = mid - 1;
+          mid = (left + right) >> 1;
+        } else if (value > array[mid]) {
+          left = mid + 1;
+          mid = (left + right) >> 1;
+        } else if (array[mid] === value) {
+          ret = mid;
+          if (fromRight) {            
+          left = mid + 1;
+          mid = (left + right) >> 1;
+          } else {
+            right = mid - 1;
+            mid = (left + right) >> 1;
+          }
+        }
       }
-
-      return idx;
+      return ret;
     }
 
-    function baseBinarySearch(array,value,fromRight = false) {
-
+    function baseIndex(array,predicate = identity,fromIndex) {
+      
     }
 
-    function indexOf(array) {
-
+    function indexOf(array,value,fromIndex = 0) {
+      return baseIndexof(array, value, false, false, fromIndex);
     }
 
-    function lastIndexOf(array) {
-
+    function lastIndexOf(array, value, fromIndex = array.length - 1) {
+      return baseIndexof(array, value, false, true, fromIndex);
     }
 
-    function sortedIndexOf(array) {
-
+    function sortedIndexOf(array,value, fromIndex = 0) {
+      return baseIndexof(array, value, true, false, fromIndex);
     }
 
-    function sortedLatsIndexOf(array) {
-
+    function sortedLatsIndexOf(array, value, fromIndex = array.length - 1) {
+      return baseIndexof(array, value, ture, true, fromIndex);
     }
 
     return {
@@ -524,6 +544,8 @@ var tttinkl = function() {
       fill,
       fromPairs,
       toPairs,
-      toPairsIn
+      toPairsIn,
+      indexOf,
+      lastIndexOf
     }
 }();
