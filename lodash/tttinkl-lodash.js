@@ -438,12 +438,27 @@ var tttinkl = function() {
 
     function baseIndexof(array, value, isSorted, fromRight, fromIndex) {
       if(!isSorted) {
-        var arr = Array.from(array);
-        arr.sort();
+        if (!fromRight) {
+          var index = fromIndex - 1,
+              length = array.length;
+          while (++index < length) {
+            if (array[index] === value) {
+              return index;
+            }
+          }
+          return -1;
+        } else {
+          var index = fromIndex + 1;
+          while (--index > -1) {
+            if (array[index] === value) {
+              return index;
+            }
+          }
+          return -1;
+        }
       }else {
-        var arr = array;
+        return baseBinarySearch(array,value,fromRight,fromIndex);
       }
-      return baseBinarySearch(arr,value,fromRight,fromIndex);
     }
 
     function baseBinarySearch(array,value,fromRight = false,fromIndex) {
