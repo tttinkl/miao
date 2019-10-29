@@ -664,6 +664,56 @@ var tttinkl = function() {
         return ret;
     }
 
+    function unzip(array) {
+        var ret = [];
+        for (let i = 0 ;i < array.length; i++) {
+            for (let j = 0; j < array[i].length;j++) {
+                ret[j] = ret[j] ? ret[j] : [];
+                ret[j][i] = array[i][j];
+            }
+        }
+        return ret;
+    }
+
+    function without(array, ...values) {
+        var ret = [];
+        array.forEach((it) => {
+            if (!values.includes(it)) {
+                ret.push(it);
+            }
+        })
+        return ret;
+    }
+
+    function xor(...array) {    
+        var arr = concat(...array);
+        if (arr.length == 1) {
+            return arr;
+        }
+        arr.sort();
+        var ret = [];
+        var flag = arr[0];
+        var t = true;
+        for (let i = 1; i < arr.length;i++) {
+            if (arr[i] != flag) {
+                if (t = true) {
+                    ret.push(flag);
+                }
+                flag = arr[i];
+                t = true;
+            } else {
+                t = false;
+            }
+        }
+        if (arr[arr.length - 1] != arr[arr.length - 2]) ret.push(arr[arr.length - 1]);
+        return ret;
+    }
+
+    function countBy(collection, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        var ret = {};
+        
+    }
     return {
         chunk,
         compact,
@@ -734,6 +784,10 @@ var tttinkl = function() {
         sortedIndexBy,
         union,
         uniq,
-        uniqBy
+        uniqBy,
+        zip,
+        unzip,
+        without,
+        xor
     }
 } ();
