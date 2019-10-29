@@ -497,7 +497,7 @@ var tttinkl = function() {
 
     function baseIndex(array, predicate = identity, fromIndex) {
 
-}
+    }
 
     function indexOf(array, value, fromIndex = 0) {
         return baseIndexof(array, value, false, false, fromIndex);
@@ -512,14 +512,14 @@ var tttinkl = function() {
     }
 
     function sortedLastIndexOf(array, value, fromIndex = array.length - 1) {
-        return baseIndexof(array, value, ture, true, fromIndex);
+        return baseIndexof(array, value, true, true, fromIndex);
     }
 
     function initial(array) {
         return array.slice(0, array.length - 1);
     }
 
-    function intersection([arrays]) {
+    function intersection(...arrays) {
         var map = {};
         var ret = [];
         var length = arrays.length;
@@ -529,7 +529,7 @@ var tttinkl = function() {
                 set.add(arrays[i][j]);
             }
             for (let v of set) {
-                map[v] = map[v] ? 1 : map[v] + 1;
+                map[v] = map[v]==undefined ? 1 : map[v] + 1;
             }
         }
         for (let k in map) {
@@ -537,9 +537,126 @@ var tttinkl = function() {
                 ret.push(k);
             }
         }
+
         return ret;
     }
 
+    function intersectionBy(...arrays) {
+        // if (isArray(arrays[arrays.length - 1])) {
+        //     iteratee = identity;
+        // } else {
+        //     iteratee = arrays.pop();
+        // }  
+    }
+
+    function join(array, separator = ",") {
+        var str = "";
+        array.forEach((it) => {
+            str += it;
+            str += separator;
+        });
+        return str;
+    }
+
+    function last(array) {
+        return array[array.length - 1];
+    }
+
+    function nth(array, n = 0) {
+        return array[n];
+    }
+
+    function pull(array, ...values) {
+        for (let i = array.length - 1; i >= 0; i--) {
+            if (values.includes(array[i]));
+            array.splice(i,1);
+        }
+    }
+
+    function pullAll(array, values) {
+        for (let i = array.length - 1; i >= 0; i--) {
+            if (values.includes(array[i]));
+            array.splice(i,1);
+        }    
+    }
+
+    function pullAllBy(array,values,iteratee = identity) {
+
+    }
+
+    function reverse(array) {
+        return array == null ? array : Array.prototype.reverse.call(array);
+    }
+
+    function sortedIndexBy(array, value, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        var left = 0,
+            right = array.length - 1,
+            mid = (left + right) >> 1,
+            index = array.length;
+        while(left <= right) {
+            if (iteratee(value) > iteratee(array[mid])) {
+                left = mid + 1;
+                mid = (left + right) >> 1;
+            } else {
+                index = mid;
+                right = mid - 1;
+                mid = (left + right) >> 1;
+            }
+        }
+        return index;
+    }
+
+    function sortedIndex(array, value) {
+        return sortedIndexBy(array, value);
+    }
+
+    function union(...arrays) {
+        return uniq(concat(...arrays));
+    }
+    function unionBy(...arrays) {
+        if (!isArray(arrays[array.length - 1])) {
+            iteratee = getIteratee(arrays.pop());
+        } else {
+            iteratee = identity;
+        };
+        return uniqBy(concat(...arrays),iteratee);
+    }
+
+    function uniq(array) {
+        return uniqBy(array);
+    }
+
+    function uniqBy(array, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        var ret = [];
+        var set = new Set();
+        array.forEach((it) => {
+            if (!set.has(iteratee(it))) {
+                set.add(iteratee(it));
+                ret.push(it);
+            }
+        })
+        return it;
+    }
+
+    function zip(...arrays) {
+        var length = 0;
+        var ret = [];
+        arrays.forEach((arr) => {
+            if (length < arr.length) {
+                length = arr.length;
+            }
+        });
+        for (let i = 0; i < length; i++) {
+            var ret2 = [];
+            for (let j = 0; j < arrays.length; j++) {
+                ret2.push(arrays[j][i]);
+            };
+            ret.push(ret2);
+        };
+        return ret;
+    }
     return {
         chunk,
         compact,
@@ -597,6 +714,19 @@ var tttinkl = function() {
         sortedIndexOf,
         sortedLastIndexOf,
         initial,
-        intersection
+        intersection,
+        intersectionBy,
+        join,
+        last,
+        nth,
+        pull,
+        pullAll,
+        pullAllBy,
+        reverse,
+        sortedIndex,
+        sortedIndexBy,
+        union,
+        uniq,
+        uniqBy
     }
 } ();
