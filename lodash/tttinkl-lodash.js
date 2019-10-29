@@ -534,7 +534,7 @@ var tttinkl = function() {
         }
         for (let k in map) {
             if (map[k] == length) {
-                ret.push(k);
+                ret.push(+k);
             }
         }
 
@@ -555,7 +555,7 @@ var tttinkl = function() {
             str += it;
             str += separator;
         });
-        return str;
+        return str.slice(0,str.length - 1);
     }
 
     function last(array) {
@@ -563,14 +563,18 @@ var tttinkl = function() {
     }
 
     function nth(array, n = 0) {
+        n = n % array.length;
+        if ( n < 0) n = array.length + n;
         return array[n];
     }
 
     function pull(array, ...values) {
         for (let i = array.length - 1; i >= 0; i--) {
-            if (values.includes(array[i]));
-            array.splice(i,1);
+            if (values.includes(array[i])) {
+                array.splice(i,1);
+            }
         }
+        return array;
     }
 
     function pullAll(array, values) {
@@ -578,6 +582,7 @@ var tttinkl = function() {
             if (values.includes(array[i]));
             array.splice(i,1);
         }    
+        return array;
     }
 
     function pullAllBy(array,values,iteratee = identity) {
@@ -632,12 +637,13 @@ var tttinkl = function() {
         var ret = [];
         var set = new Set();
         array.forEach((it) => {
+            console.log(it)
             if (!set.has(iteratee(it))) {
                 set.add(iteratee(it));
                 ret.push(it);
             }
         })
-        return it;
+        return ret;
     }
 
     function zip(...arrays) {
@@ -657,6 +663,7 @@ var tttinkl = function() {
         };
         return ret;
     }
+
     return {
         chunk,
         compact,
