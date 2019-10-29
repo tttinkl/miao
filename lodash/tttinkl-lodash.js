@@ -563,7 +563,6 @@ var tttinkl = function() {
     }
 
     function nth(array, n = 0) {
-        n = n % array.length;
         if ( n < 0) n = array.length + n;
         return array[n];
     }
@@ -579,8 +578,9 @@ var tttinkl = function() {
 
     function pullAll(array, values) {
         for (let i = array.length - 1; i >= 0; i--) {
-            if (values.includes(array[i]));
-            array.splice(i,1);
+            if (values.includes(array[i])) {
+                array.splice(i,1);
+            }
         }    
         return array;
     }
@@ -687,6 +687,7 @@ var tttinkl = function() {
 
     function xor(...array) {    
         var arr = concat(...array);
+
         if (arr.length == 1) {
             return arr;
         }
@@ -696,7 +697,7 @@ var tttinkl = function() {
         var t = true;
         for (let i = 1; i < arr.length;i++) {
             if (arr[i] != flag) {
-                if (t = true) {
+                if (t) {
                     ret.push(flag);
                 }
                 flag = arr[i];
@@ -712,7 +713,7 @@ var tttinkl = function() {
     function countBy(collection, iteratee = identity) {
         iteratee = getIteratee(iteratee);
         var ret = {};
-        
+
     }
     return {
         chunk,
