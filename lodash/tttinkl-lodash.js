@@ -52,7 +52,7 @@ var tttinkl = function() {
     }
 
     function compact(ary) {
-        return ary.filter(it = >it)
+        return ary.filter(it =>it)
     }
 
     function concat(array, ...values) {
@@ -382,8 +382,9 @@ var tttinkl = function() {
 
     function compose(funcs) {
         return function(...args) {
-            var value = funcs[0](...args) for (var i = 1; i < funcs.length; i++) {
-                value = funcs[i](value)
+            var value = funcs[0](...args) ;
+            for (var i = 1; i < funcs.length; i++) {
+                value = funcs[i](value);
             }
             return value
         }
@@ -519,11 +520,12 @@ var tttinkl = function() {
     }
 
     function intersection([arrays]) {
-        console.log(arrays) var map = {};
+        var map = {};
         var ret = [];
         var length = arrays.length;
         for (let i = 0; i < arrays.length; i++) {
-            var set = new Set() for (let j = 0; j < arrays[i].length; j++) {
+            var set = new Set();
+            for (let j = 0; j < arrays[i].length; j++) {
                 set.add(arrays[i][j]);
             }
             for (let v of set) {
