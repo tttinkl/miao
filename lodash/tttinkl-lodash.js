@@ -713,7 +713,78 @@ var tttinkl = function() {
     function countBy(collection, iteratee = identity) {
         iteratee = getIteratee(iteratee);
         var ret = {};
+        for (let i = 0; i < collection.length;i++) {
+            var key = iteratee(collection[i]);
+            ret[key] = ret[key] ? 0 : ret[key] + 1;
+        }
+        return ret;
+    }
 
+    function keyBy(collection, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        console.log(iteratee)
+        var ret = {};
+        for (let i = 0; i < collection.length;i++) {
+            var key = iteratee(collection[i]);
+            console.log(key)
+            ret[key] = collection[i];
+        }
+        return ret;
+    }
+
+    function every(collection, predicate = identity) {
+        var iteratee = getIteratee(predicate);
+        var ret = true;
+        for(let i = 0; i < collection; i++) {
+            var t = iteratee(collection[i]);
+            if (!t) return false;
+        }
+        return true;
+    }
+
+    function flatMap(collection, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        var ret = [];
+        collection.forEach((it) => {
+            ret.push(...iteratee(it));
+        })
+        return ret;
+    }
+
+    function flatMapDeep(collection, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        var ret = [];
+        collection.forEach((it) => {
+            ret.push(...flattenDeep(iteratee(it)));
+        })
+        return ret;
+    }
+
+    function flatMapDepth(collection, iteratee = identity, depth = 1) {
+        iteratee = getIteratee(iteratee);
+        var ret = [];
+        collection.forEach((it) => {
+            ret.push(flattenDepth(iteratee(it),depth));
+        })
+        return ret;        
+    }
+
+    function groupBy(collection, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        var ret = {};
+        collection.forEach((it) => {
+            var key = iteratee(it);
+            if (ret[key]) {
+                ret[key].push(it);
+            } else {
+                ret[key] = [it];
+            }
+        })
+        return ret;
+    }
+
+    function partition() {
+        
     }
     return {
         chunk,
@@ -789,6 +860,12 @@ var tttinkl = function() {
         zip,
         unzip,
         without,
-        xor
+        xor,
+        keyBy,
+        every,
+        flatMap,
+        flatMapDepth,
+        flatMapDeep,
+        groupBy
     }
 } ();
