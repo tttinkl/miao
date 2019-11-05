@@ -310,7 +310,7 @@ var tttinkl = function() {
                 result.push(value);
             }
         });
-        return resultl
+        return result;
     }
 
     function each(collection, iteratee = identity) {
@@ -783,9 +783,74 @@ var tttinkl = function() {
         return ret;
     }
 
-    function partition() {
-        
+    function partition(collection, predicate = _.identity) {
+        var iteratee = getIteratee(predicate);
+        var ret = [[],[]];
+        collection.forEach(it => {
+            if (iteratee(it)) {
+                ret[0].push(it);
+            } else {
+                ret[1].push(it);
+            }
+        })
+        return ret;
     }
+
+    function reduce(collection, iteratee = identity, accumulator) {
+        iteratee = getIteratee(iteratee);
+        for (let k  in collection) {
+            accumulator = accumulator ? iteratee(accumulator, collection[k],k) : collection[k];
+        }
+        return accumulator;
+    }
+
+    function reduceRight(collection, iteratee = identity, accumulator) {
+        iteratee = getIteratee(iteratee);
+        if (!isArray(collection)) return reduce(collection, iteratee, accumulator);
+        else {
+            for (let i = collection.length; i >=0; i--) {
+                accumulator = accumulator ? iteratee(accumulator, collection[i],i) : collection[i];
+            }
+        }
+        return accumulator;
+    }
+
+    function reject(collection, predicate = identity) {
+        if (isArray(collection)) return _arrayReject(collection, predicate);
+        else return _baseReject(collection,predicate);
+    };
+    function _arrayReject(collection, predicate) {
+        var iteratee = getIteratee(predicate);
+        var ret = [];
+        each(collection, (it) => {
+            if(!iteratee(it)) {
+                ret.push(it);
+            }
+        })
+        return ret;
+    }
+    function _baseReject(collection, predicate) {
+        var iteratee = getIteratee(predicate);
+        var ret = {};
+        each(collection, (it,key) => {
+            if (!iteratee(it)) {
+                ret[key] = it;
+            }
+        })
+        return ret;
+    }
+
+    function sample(collection) {
+        if (isArray(collection)) return collection[Math.ceil(Math.random() * collection.length) - 1];
+        else {
+            var all = [];
+            each(collection, (it,key)=> {
+                all.push(key);
+            });
+            return  collection[all[Math.ceil(Math.random() * all.length) - 1]];
+        }
+    }
+
     return {
         chunk,
         compact,
@@ -861,11 +926,16 @@ var tttinkl = function() {
         unzip,
         without,
         xor,
+        countBy,
         keyBy,
         every,
         flatMap,
         flatMapDepth,
         flatMapDeep,
-        groupBy
+        groupBy,
+        reduce,
+        reduceRight,
+        reject,
+        sample
     }
 } ();
