@@ -715,7 +715,7 @@ var tttinkl = function() {
         var ret = {};
         for (let i = 0; i < collection.length;i++) {
             var key = iteratee(collection[i]);
-            ret[key] = ret[key] ? 0 : ret[key] + 1;
+            ret[key] = ret[key] ? ret[key] + 1 : 0;
         }
         return ret;
     }
@@ -735,7 +735,7 @@ var tttinkl = function() {
     function every(collection, predicate = identity) {
         var iteratee = getIteratee(predicate);
         var ret = true;
-        for(let i = 0; i < collection; i++) {
+        for(let i = 0; i < collection.length; i++) {
             var t = iteratee(collection[i]);
             if (!t) return false;
         }
@@ -848,6 +848,13 @@ var tttinkl = function() {
                 all.push(key);
             });
             return  collection[all[Math.ceil(Math.random() * all.length) - 1]];
+        }
+    }
+
+    function shuffle(collection) {
+        var ret = [];
+        while(collection.length != 0) {
+            ret.push(collection[Math.ceil(Math.random() * collection.length) - 1]);
         }
     }
 
