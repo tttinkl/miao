@@ -893,8 +893,9 @@ var tttinkl = function() {
     }
 
     function _arraySome(collection, predicate) {
+        iteratee = getIteratee(predicate);
         for (let i = 0; i < collection.length;i++) {
-            if (predicate(collection[i]) === true) return true;
+            if (iteratee(collection[i]) === true) return true;
         }
         return false;
     }
@@ -936,7 +937,7 @@ var tttinkl = function() {
     }
 
     function isDate(value) {
-        return value instanceof Date.prototype
+        return value instanceof Date
     }
 
     function isElement(value) {
@@ -945,11 +946,11 @@ var tttinkl = function() {
     }
 
     function isEmpty(value) {
-        return Object.key(value).length === 0;
+        return Object.keys(value).length === 0;
     }
 
     function isError(value) {
-        return Object.prototype.toString.call(value);
+        return Object.prototype.toString.call(value) === "[object Error]";
     }
 
     function isFinite(value) {
@@ -991,7 +992,7 @@ var tttinkl = function() {
         if (isObject(value)) {
             var result = [];
             for (let k in value) {
-                result.push(k);
+                result.push(value(k));
             }
             return result;
         }
