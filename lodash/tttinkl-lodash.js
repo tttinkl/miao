@@ -1092,7 +1092,7 @@ var tttinkl = function() {
         size,
         some,
         defer,
-        delay，
+        delay,
         isBoolean,
         isDate,
         isElement,
