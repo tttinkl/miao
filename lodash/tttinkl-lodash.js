@@ -932,7 +932,7 @@ var tttinkl = function() {
     }
 
     function isBoolean(value) {
-        return typeof value ==== "boolean";
+        return typeof value === "boolean";
     }
 
     function isDate(value) {
