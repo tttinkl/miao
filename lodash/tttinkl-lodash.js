@@ -3,6 +3,13 @@ var tttinkl = function() {
         return value;
     }
 
+    function isObjectLike(value) {
+        return value != null && typeof value === "object";
+    }
+
+    function isPlainObject(value) {
+        return 
+    }
     function isObject(value) {
         return ((typeof value === "object" || typeof value == "function") && value !== null)
     }
@@ -715,7 +722,7 @@ var tttinkl = function() {
         var ret = {};
         for (let i = 0; i < collection.length;i++) {
             var key = iteratee(collection[i]);
-            ret[key] = ret[key] ? ret[key] + 1 : 0;
+            ret[key] = ret[key] !== undefined ? ret[key] + 1 : 0;
         }
         return ret;
     }
@@ -808,7 +815,7 @@ var tttinkl = function() {
         iteratee = getIteratee(iteratee);
         if (!isArray(collection)) return reduce(collection, iteratee, accumulator);
         else {
-            for (let i = collection.length; i >=0; i--) {
+            for (let i = collection.length - 1; i >=0; i--) {
                 accumulator = accumulator ? iteratee(accumulator, collection[i],i) : collection[i];
             }
         }
@@ -854,10 +861,146 @@ var tttinkl = function() {
     function shuffle(collection) {
         var ret = [];
         while(collection.length != 0) {
-            ret.push(collection[Math.ceil(Math.random() * collection.length) - 1]);
+            var n = Math.ceil(Math.random() * collection.length) - 1;
+            ret.push(...collection.splice(n,1));
         }
+        return ret;
+          //lodash.sourceCode
+          // var index = -1,
+          //     length = array.length,
+          //     lastIndex = length - 1;
+
+          // size = size === undefined ? length : size;
+          // while (++index < size) {
+          //   var rand = baseRandom(index, lastIndex),
+          //       value = array[rand];
+
+          //   array[rand] = array[index];
+          //   array[index] = value;
+          // }
+          // array.length = size;
+          // return array;        
     }
 
+    function size(collection) {
+        return Object.keys(collection).length;
+    }
+
+    function some(collection, predicate = identity) {
+        iteratee = getIteratee(predicate);
+        if (isArray(collection)) return _arraySome(collection, iteratee);
+        else return _baseSome(collection, iteratee);
+    }
+
+    function _arraySome(collection, predicate) {
+        for (let i = 0; i < collection.length;i++) {
+            if (predicate(collection[i]) === true) return true;
+        }
+        return false;
+    }
+
+    function _baseSome(collection, predicate) {
+        for (let k in collection) {
+            if (predicate(collection[k]) === true) return true;
+        }
+        return false;
+    }
+
+    function sortBy(collection, iteratees = [identity]) {
+        iteratees = iteratees.map(it => getIteratee(it));
+        var length = iteratees.length;
+        collection.sort(sortHelper);
+        function sortHelper(a, b) {
+            for(let i = 0; i < iteratees.length;i++ ) {
+                if (iteratees[i](a) > iteratees[i](b)) {
+                    return -1;
+                } else  if (iteratees[i](a) < iteratees[i](b)) {
+                        return 1;
+                }
+            } 
+            return 0;
+        };
+        return collection;      
+    }
+
+    function defer(func, ...args) {
+        setTimeout(func(...args),1);
+    }
+
+    function delay(func, wait, ...args) {
+        setTimeout(func(...args),wait);
+    }
+
+    function isBoolean(value) {
+        return typeof value ==== "boolean";
+    }
+
+    function isDate(value) {
+        return value instanceof Date.prototype
+    }
+
+    function isElement(value) {
+        return isObjectLike(value) && value.nodeType === 1 && Object.prototype.toString.call(value) != "[object Object]"
+        //
+    }
+
+    function isEmpty(value) {
+        return Object.key(value).length === 0;
+    }
+
+    function isError(value) {
+        return Object.prototype.toString.call(value);
+    }
+
+    function isFinite(value) {
+        return Number.isFinite(value);
+    }
+
+    function isNaN(value) {
+        return Number.isNaN(value)
+    }
+
+    function isNil(value) {
+        return typeof value === "undefined" || isNull(value);
+    }
+
+    function isNull(value) {
+        return Object.prototype.toString.call(value) === "[object Null]";
+    }
+
+    function isNumber(value) {
+        return typeof value === "number";
+    }
+
+    function isRegExp(value) {
+        return Object.prototype.toString.call(value) === "[object RegExp]";
+    }
+
+    function isSrting(value) {
+        return typeof value === "string";
+    }
+
+    function isUndefined(value) {
+        return typeof value === "undefined";
+    }
+
+    function toArray(value) {
+        if (isSrting(value)) {
+            return value.split("");
+        }
+        if (isObject(value)) {
+            var result = [];
+            for (let k in value) {
+                result.push(k);
+            }
+            return result;
+        }
+        return [];
+    }
+
+    function ceil(value) {
+
+    }
     return {
         chunk,
         compact,
@@ -943,6 +1086,26 @@ var tttinkl = function() {
         reduce,
         reduceRight,
         reject,
-        sample
+        sample,
+        shuffle,
+        sortBy,
+        size,
+        some,
+        defer,
+        delay，
+        isBoolean,
+        isDate,
+        isElement,
+        isEmpty,
+        isError,
+        isFinite,
+        isNaN,
+        isNil,
+        isNull,
+        isNumber,
+        isRegExp,
+        isSrting,
+        isUndefined,
+        toArray,
     }
 } ();
