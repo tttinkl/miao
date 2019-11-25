@@ -1247,7 +1247,7 @@ var tttinkl = function() {
         forInRight,
         times,
         constant,
-        sumBy
+        sumBy,
         assign,
         assignIn,
         defaults,
