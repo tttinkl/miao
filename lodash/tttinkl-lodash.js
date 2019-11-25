@@ -255,7 +255,6 @@ var tttinkl = function() {
         var idx = fromRight ? array.length: -1;
         while ((fromRight ? --idx: ++idx < array.length)) {
             if (iteratee(array[idx], idx, array) === false) {
-                console.log(idx, iteratee(array[idx], idx, array));
                 break;
             }
         }
@@ -272,6 +271,7 @@ var tttinkl = function() {
         if (isArray(func)) return matchesProperty(func[0], func[1]);
         if (isObject(func)) return matches(func);
         if (typeof func === "string") return property(func);
+
     }
 
     function map(collection, iteratee = identity) {
@@ -722,7 +722,7 @@ var tttinkl = function() {
         var ret = {};
         for (let i = 0; i < collection.length;i++) {
             var key = iteratee(collection[i]);
-            ret[key] = ret[key] !== undefined ? ret[key] + 1 : 0;
+            ret[key] = ret[key] !== undefined ? ret[key] + 1 : 1;
         }
         return ret;
     }
@@ -887,20 +887,22 @@ var tttinkl = function() {
     }
 
     function some(collection, predicate = identity) {
-        iteratee = getIteratee(predicate);
+        var iteratee = getIteratee(predicate);
+        console.log(iteratee);
         if (isArray(collection)) return _arraySome(collection, iteratee);
         else return _baseSome(collection, iteratee);
     }
 
     function _arraySome(collection, predicate) {
-        iteratee = getIteratee(predicate);
+        console.log(predicate)
         for (let i = 0; i < collection.length;i++) {
-            if (iteratee(collection[i]) === true) return true;
+            if (predicate(collection[i]) === true) return true;
         }
         return false;
     }
 
     function _baseSome(collection, predicate) {
+        console.log(predicate)
         for (let k in collection) {
             if (predicate(collection[k]) === true) return true;
         }
@@ -946,6 +948,7 @@ var tttinkl = function() {
     }
 
     function isEmpty(value) {
+        if (isNull(value)) return true;
         return Object.keys(value).length === 0;
     }
 
@@ -977,7 +980,7 @@ var tttinkl = function() {
         return Object.prototype.toString.call(value) === "[object RegExp]";
     }
 
-    function isSrting(value) {
+    function isString(value) {
         return typeof value === "string";
     }
 
@@ -999,7 +1002,132 @@ var tttinkl = function() {
         return [];
     }
 
-    function ceil(value) {
+    function ceil(value,precision = 0) {
+
+    }
+
+    function sumBy(array, iteratee = identity) {
+        var iteratee = getIteratee(iteratee);
+        var sum = array.reduce((prev, cur, index, array) => {
+            if (index === 1) prev = iteratee(prev);
+            return prev + iteratee(cur);
+        })
+        return sum;
+    }
+
+    function assign(object, ...sources) {
+        sources.forEach((src) => {
+            var keys = Object.keys(src);
+            keys.forEach((key) => {
+                object[key] = src[key];
+            })
+        })
+        return object;
+    }
+
+    function assignIn(object, ...sources) {
+        sources.forEach((src) => {
+            for (let k in src) {
+                object[k] = src[k];
+            }
+        })
+        return object;
+    }    
+
+    function defaults(object, ...sources) {
+        sources.forEach((src) => {
+            var keys = Object.keys(src);
+            keys.forEach((key) => {
+                if (object[key] == undefined) {
+                    object[key] = src[key];                    
+                }
+            })
+        })
+        return object;
+    }
+
+    function defaultsDeep(object, ...sources) {
+        sources.forEach((src) => {
+            var keys = Object.keys(src);
+            keys.forEach((key) => {
+                if (object[key] == undefined) {
+                    object[key] = src[key];                    
+                } else {
+                    defaultsDeep(object[key], src[key]);
+                }
+            })
+        })
+        return object;
+    }      
+
+    function findKey(obj, predicate = identity) {
+        var iteratee = getIteratee(predicate);
+        for (let k in obj) {
+            if (iteratee(obj[k])) return k;
+        }
+        return null;
+    }
+
+    function findLastKey(obj, predicate = identity) {
+        var keys = Object.keys(obj);
+        var iteratee = getIteratee(predicate);
+        for (let i = keys.length - 1; i >=0; i--) {
+            if (iteratee(obj[keys[i]])) return keys[i];
+        }
+        return null;
+    }
+
+    function forIn(obj, iteratee = identity) {
+        var iteratee = getIteratee(iteratee);
+        for (let k in obj) {
+            iteratee(obj[k],k);
+        }
+    } 
+
+    function forInRight(obj, iteratee = identity) {
+        var iteratee = getIteratee(iteratee);
+        var forInKeys = [];
+        for (let k in obj) {
+            forInKeys.unshift(k);
+        }
+        forInKeys.forEach(it => {
+            iteratee(obj[it],it)
+        })
+    }
+
+    function forOwn(obj, iteratee = identity) {
+        var iteratee = getIteratee(iteratee);
+        var keys = Object.keys(obj);
+        keys.forEach(k => {
+            iteratee(obj[k],k);
+        });
+    }
+
+    function forOwnRight(obj, iteratee = identity) {
+        var iteratee = getIteratee(iteratee);
+        var keys = Object.keys(obj);
+        keys.reverse();
+        keys.forEach(k => {
+            iteratee(obj[k],k);
+        })
+    }
+
+    function constant(value) {
+        return function() {
+            return value;
+        }
+    }
+
+    function times(n, iteratee = identity) {
+        var ret = [];
+        var iteratee = getIteratee(iteratee);
+        for(let i = 0; i < n;i++){
+            ret.push(iteratee(i));
+        }
+        return ret;
+    }
+
+    function functions(obj) {
 
     }
     return {
@@ -1105,8 +1233,31 @@ var tttinkl = function() {
         isNull,
         isNumber,
         isRegExp,
-        isSrting,
+        isString,
         isUndefined,
         toArray,
+        sumBy,
+        assign,
+        assignIn,
+        defaults,
+        defaultsDeep,
+        findKey,
+        findLastKey,
+        forIn,
+        forInRight,
+        times,
+        constant,
+        sumBy
+        assign,
+        assignIn,
+        defaults,
+        defaultsDeep,
+        findKey,
+        findLastKey,
+        forIn,
+        forInRight,
+        forOwn,
+        forOwnRight,
+        constant,
     }
 } ();
