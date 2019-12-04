@@ -1082,6 +1082,7 @@ var tttinkl = function() {
         for (let k in obj) {
             iteratee(obj[k],k);
         }
+        return obj;
     } 
 
     function forInRight(obj, iteratee = identity) {
@@ -1093,6 +1094,7 @@ var tttinkl = function() {
         forInKeys.forEach(it => {
             iteratee(obj[it],it)
         })
+        return obj;
     }
 
     function forOwn(obj, iteratee = identity) {
@@ -1101,6 +1103,7 @@ var tttinkl = function() {
         keys.forEach(k => {
             iteratee(obj[k],k);
         });
+        return obj;
     }
 
     function forOwnRight(obj, iteratee = identity) {
@@ -1109,7 +1112,8 @@ var tttinkl = function() {
         keys.reverse();
         keys.forEach(k => {
             iteratee(obj[k],k);
-        })
+        });
+        return obj;
     }
 
     function constant(value) {
@@ -1128,9 +1132,20 @@ var tttinkl = function() {
     }
 
     function functions(obj) {
-
+        return Object.keys(obj);
     }
+
+    function has(obj, path) {
+        if (obj[path] === undefined) return false;
+        else return has(obj[path])
+    }
+
+    function isArguments(args) {
+        return args.callee && isFunction(args.callee);
+    }
+
     return {
+        identity,
         chunk,
         compact,
         concat,
@@ -1259,5 +1274,8 @@ var tttinkl = function() {
         forOwn,
         forOwnRight,
         constant,
+        functions,
+        isArguments,
+
     }
 } ();
