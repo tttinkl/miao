@@ -1144,6 +1144,85 @@ var tttinkl = function() {
         return args.callee && isFunction(args.callee);
     }
 
+    function invert(obj) {
+        var object = {};
+        forOwn(obj, (value, k) => {
+            object[value] = k;
+        })
+        return object;
+    }
+
+    function invoke(obj, path, ...args) {
+       if (isString(path)) {
+        path = path.split(".");
+       };
+       var f = obj;
+       forEach(path, it => {
+        f = f[it];
+       }) 
+       return f(...args);
+    }
+
+    function keys(obj) {
+        return Object.keys(obj);
+    }
+
+    function mapKeys(obj, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        var object = {};
+        forOwn(obj, (value, k) => {
+            var key = iteratee(value, k);
+            object[key] = value;
+        })
+        return object;
+    }
+
+    function mapValues(obj, iteratee = identity) {
+        iteratee = getIteratee(iteratee);
+        var object = {};
+        forOwn(obj, (value, k) => {
+            var value = iteratee(value, k);
+            object[k] = value;
+        })
+        return object;
+    }
+
+    function merge(obj, ...sources) {
+        for (let i = 0; i < sources.length; i++) {
+            forOwnRightn(sources[i], (value, k) => {
+                if (typeof value !== "object") {
+
+                } else {
+                    obj[k] = [obj[k]]
+                }
+            }
+        }
+        return 
+    }
+
+    function omit(obj, ...paths) {
+        var object = {};
+        forIn(obj, (value, k) => {
+            if (!paths.includes(k)) {
+                object[k] = value;
+            }
+        }) 
+        return object;
+    }
+
+    function pick(object, paths) {
+        var object = {};
+        forIn(obj, (value, k) => {
+            if (paths.includes(k)) {
+                object[k] = value;
+            }
+        }) 
+        return object;        
+    }
+
+    function result(obj, path, defaultValue) {
+
+    }
     return {
         identity,
         chunk,
@@ -1276,6 +1355,18 @@ var tttinkl = function() {
         constant,
         functions,
         isArguments,
+        invert,
+        isArguments,
+        invert,
+        invoke,
+        keys,
+        mapKeys,
+        mapValues,
+        merge,
+        omit,
+        pick,
+        result,
+
 
     }
 } ();
