@@ -1195,7 +1195,7 @@ var tttinkl = function() {
                 } else {
                     obj[k] = [obj[k]]
                 }
-            }
+            })
         }
         return 
     }
