@@ -1153,14 +1153,12 @@ var tttinkl = function() {
     }
 
     function invoke(obj, path, ...args) {
-       if (isString(path)) {
-        path = path.split(".");
-       };
-       var f = obj;
-       forEach(path, it => {
-        f = f[it];
-       }) 
-       return f(...args);
+        path = toPath(path);
+        var f = obj;
+        forEach(path, it => {
+            f = f[it];
+        }) 
+        return f(...args);
     }
 
     function keys(obj) {
@@ -1200,17 +1198,17 @@ var tttinkl = function() {
         return 
     }
 
-    function omit(obj, ...paths) {
+    function omit(obj, ...props) {
         var object = {};
         forIn(obj, (value, k) => {
-            if (!paths.includes(k)) {
+            if (!props.includes(k)) {
                 object[k] = value;
             }
         }) 
         return object;
     }
 
-    function pick(object, paths) {
+    function pick(obj, ...props) {
         var object = {};
         forIn(obj, (value, k) => {
             if (paths.includes(k)) {
