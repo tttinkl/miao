@@ -1,0 +1,1 @@
+export const GET_ART_LIST = "home/GET_ART_LIST";
